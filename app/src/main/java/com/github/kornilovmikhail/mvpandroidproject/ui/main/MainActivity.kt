@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.ListCallback
 
