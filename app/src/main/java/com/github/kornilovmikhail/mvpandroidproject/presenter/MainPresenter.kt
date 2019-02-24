@@ -11,23 +11,19 @@ import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(private val mvi: MainViewInterface) : MainPresenterInterface {
 
-    private var listEvents: List<Event>
-
-    init {
-        listEvents = ArrayList()
-    }
-
     @SuppressLint("CheckResult")
     override fun getEvents() {
-        getEventsSingle().subscribeBy(
-            onSuccess = {
-                listEvents = it
-                mvi.displayEvents(listEvents)
-            },
-            onError = {
-                mvi.displayError()
-            }
-        )
+        getEventsSingle()
+            .doOnSubscribe { mvi.showProgressBar() }
+            .doAfterTerminate { mvi.hideProgressBar() }
+            .subscribeBy(
+                onSuccess = {
+                    mvi.displayEvents(it)
+                },
+                onError = {
+                    mvi.displayError()
+                }
+            )
     }
 
     private fun getEventsSingle(): Single<List<Event>> {

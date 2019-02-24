@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
@@ -18,19 +19,19 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
 
     private lateinit var rvEvents: RecyclerView
     private lateinit var mainPresenter: MainPresenter
-    private lateinit var listEvents: List<Event>
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rvEvents = rv_events
+        progressBar = findViewById(R.id.progressBar)
         setupMVP()
         setupViews()
         getEventList()
     }
 
     override fun displayEvents(listEvents: List<Event>) {
-        this.listEvents = listEvents
         rvEvents.adapter = EventAdapter(listEvents)
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
@@ -39,13 +40,19 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
         Toast.makeText(this, getString(R.string.server_events_error), Toast.LENGTH_SHORT).show()
     }
 
-    override fun callback(position: Int) {
-        println(position)
-        println(listEvents)
+    override fun showProgressBar() {
+        progressBar.visibility = ProgressBar.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = ProgressBar.INVISIBLE
+    }
+
+    override fun navigateToMain(title: String, details: String, eventDate: String) {
         val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-        intent.putExtra("title", listEvents[position].title)
-        intent.putExtra("details", listEvents[position].details)
-        intent.putExtra("eventDate", listEvents[position].eventDate)
+        intent.putExtra("title", title)
+        intent.putExtra("details", details)
+        intent.putExtra("eventDate", eventDate)
         startActivity(intent)
     }
 
@@ -58,6 +65,6 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     private fun getEventList() {
-        listEvents = mainPresenter.getEvents()
+        mainPresenter.getEvents()
     }
 }

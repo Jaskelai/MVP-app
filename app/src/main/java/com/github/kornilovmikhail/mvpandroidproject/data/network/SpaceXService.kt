@@ -12,12 +12,15 @@ object SpaceXService {
         val okHttpClient = OkHttpClient.Builder()
             .build()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-        return retrofit.create(SpaceXAPI::class.java)
+        val retrofit by lazy {
+            Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(SpaceXAPI::class.java)
+        }
+        return retrofit
     }
 }

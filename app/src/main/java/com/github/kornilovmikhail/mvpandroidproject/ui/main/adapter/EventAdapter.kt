@@ -24,7 +24,13 @@ class EventAdapter(items: List<Event>) : RecyclerView.Adapter<EventAdapter.Event
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
         holder.bind(events[position].title)
-        holder.itemView.setOnClickListener { listCallback.callback(position) }
+        holder.itemView.setOnClickListener {
+            listCallback.navigateToMain(
+                events[position].title,
+                events[position].details,
+                events[position].eventDate.toString()
+            )
+        }
     }
 
     class EventHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
