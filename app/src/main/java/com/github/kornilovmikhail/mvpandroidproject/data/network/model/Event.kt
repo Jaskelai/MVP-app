@@ -7,5 +7,5 @@ data class Event(
     @SerializedName("event_date_unix") val eventDate: Long,
     @SerializedName("flight_number") val flightNumber: Int?,
     @SerializedName("details") val details: String,
-    @SerializedName("links") val links: List<Link>
+    @SerializedName("links") val links: Link
 )

@@ -1,5 +1,8 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
-interface MainViewInterface {
+import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
 
+interface MainViewInterface {
+    fun displayEvents(listEvents: List<Event>)
+    fun displayError()
 }
