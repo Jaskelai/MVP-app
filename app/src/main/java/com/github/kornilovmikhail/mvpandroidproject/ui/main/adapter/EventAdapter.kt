@@ -34,5 +34,4 @@ class EventAdapter(items: List<Event>) : RecyclerView.Adapter<EventAdapter.Event
             containerView.tv_list_item_name.text = eventName
         }
     }
-
 }
