@@ -8,7 +8,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-
 class MainPresenter(private val mvi: MainViewInterface) : MainPresenterInterface {
 
     private var listEvents: List<Event>
