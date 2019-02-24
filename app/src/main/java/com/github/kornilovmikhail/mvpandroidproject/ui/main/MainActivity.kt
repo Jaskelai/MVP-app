@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
 
     private lateinit var rvEvents: RecyclerView
     private lateinit var mainPresenter: MainPresenter
+    private lateinit var listEvents: List<Event>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,11 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     override fun callback(position: Int) {
-
+        val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+        intent.putExtra("title", listEvents[position].title)
+        intent.putExtra("details", listEvents[position].details)
+        intent.putExtra("eventDate", listEvents[position].eventDate)
+        startActivity(intent)
     }
 
     private fun setupMVP() {
@@ -54,7 +60,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     private fun getEventList() {
-        mainPresenter.getEvents()
+        listEvents = mainPresenter.getEvents()
     }
 
 
