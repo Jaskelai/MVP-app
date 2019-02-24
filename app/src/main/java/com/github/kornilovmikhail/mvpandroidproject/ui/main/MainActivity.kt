@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
 
     private lateinit var rvEvents: RecyclerView
     private lateinit var mainPresenter: MainPresenter
+    private lateinit var listEvents: List<Event>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     private fun getEventList() {
-        mainPresenter.getEvents()
+        listEvents = mainPresenter.getEvents()
     }
 
 

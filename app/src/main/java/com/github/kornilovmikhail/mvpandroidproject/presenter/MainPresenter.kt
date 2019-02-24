@@ -19,8 +19,9 @@ class MainPresenter(private val mvi: MainViewInterface) : MainPresenterInterface
         compositeDisposable = CompositeDisposable()
     }
 
-    override fun getEvents() {
+    override fun getEvents(): List<Event> {
         compositeDisposable.add(getEventsDisposable())
+        return listEvents
     }
 
     private fun getEventsDisposable(): Disposable {
