@@ -3,6 +3,7 @@ package com.github.kornilovmikhail.mvpandroidproject.ui.main
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.github.kornilovmikhail.mvpandroidproject.R
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity(), DetailsViewInterface{

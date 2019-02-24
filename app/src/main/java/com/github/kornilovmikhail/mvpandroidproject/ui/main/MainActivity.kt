@@ -29,12 +29,8 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
         getEventList()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mainPresenter.dispose()
-    }
-
     override fun displayEvents(listEvents: List<Event>) {
+        this.listEvents = listEvents
         rvEvents.adapter = EventAdapter(listEvents)
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
@@ -44,6 +40,8 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     override fun callback(position: Int) {
+        println(position)
+        println(listEvents)
         val intent = Intent(this@MainActivity, DetailsActivity::class.java)
         intent.putExtra("title", listEvents[position].title)
         intent.putExtra("details", listEvents[position].details)
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     private fun getEventList() {
-        listEvents = mainPresenter.getEvents()
+        mainPresenter.getEvents()
     }
 
 
