@@ -5,6 +5,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 
 interface SpaceXAPI {
-    @GET("find")
+    @GET("history")
     fun loadCities(): Single<ListEvents>
 }

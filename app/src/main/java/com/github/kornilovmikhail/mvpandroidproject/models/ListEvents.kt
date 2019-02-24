@@ -1,4 +1,3 @@
 package com.github.kornilovmikhail.mvpandroidproject.models
 
-class ListEvents {
-}
+data class ListEvents(val listCities: List<Event>)
