@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.network
+package com.github.kornilovmikhail.mvpandroidproject.data.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

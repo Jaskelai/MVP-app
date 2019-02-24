@@ -1,8 +1,7 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui
+package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import com.github.kornilovmikhail.mvpandroidproject.R
 
 class MainActivity : AppCompatActivity(), MainViewInterface {
