@@ -13,7 +13,6 @@ import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.ListCallback
 
-
 class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
 
     private lateinit var rvEvents: RecyclerView
@@ -60,6 +59,4 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     private fun getEventList() {
         mainPresenter.getEvents()
     }
-
-
 }

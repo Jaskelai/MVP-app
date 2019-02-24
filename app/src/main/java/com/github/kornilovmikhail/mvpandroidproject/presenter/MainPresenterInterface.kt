@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.presenter
 
-interface MainPresenterInterface {
-    fun getEvents()
+import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
+interface MainPresenterInterface  {
+    fun getEvents(): List<Event>
 }
