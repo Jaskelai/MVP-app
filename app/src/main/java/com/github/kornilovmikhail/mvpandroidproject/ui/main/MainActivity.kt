@@ -19,13 +19,11 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
 
     private lateinit var rvEvents: RecyclerView
     private lateinit var mainPresenter: MainPresenter
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rvEvents = rv_events
-        progressBar = findViewById(R.id.progressBar)
         setupMVP()
         setupViews()
         getEventList()
