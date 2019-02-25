@@ -1,32 +1,35 @@
 package com.github.kornilovmikhail.mvpandroidproject.presenter
 
 import android.annotation.SuppressLint
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXService
 import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainViewInterface
+import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class MainPresenter(private val mvi: MainViewInterface) : MainPresenterInterface {
+@InjectViewState
+class MainPresenter : MvpPresenter<MainView>() {
 
     @SuppressLint("CheckResult")
-    override fun getEvents() {
+    fun getEvents() {
         getEventsSingle()
-            .doOnSubscribe { mvi.showProgressBar() }
-            .doAfterTerminate { mvi.hideProgressBar() }
+            .doOnSubscribe { viewState.showProgressBar() }
+            .doAfterTerminate { viewState.hideProgressBar() }
             .subscribeBy(
                 onSuccess = {
-                    mvi.displayEvents(it)
+                    viewState.displayEvents(it)
                 },
                 onError = {
-                    mvi.displayError()
+                    viewState.displayError()
                 }
             )
     }
 
-    fun eventClick(event: Event) = mvi.navigateToMain(event.title, event.details, event.eventDate.toString())
+    fun eventClick(event: Event) = viewState.navigateToMain(event.title, event.details, event.eventDate.toString())
 
     private fun getEventsSingle(): Single<List<Event>> {
         return SpaceXService.service()

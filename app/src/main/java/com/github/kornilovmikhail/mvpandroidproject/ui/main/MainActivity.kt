@@ -7,21 +7,24 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.arellomobile.mvp.MvpActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 
-class MainActivity : AppCompatActivity(), MainViewInterface {
+class MainActivity : MvpActivity(), MainView {
 
     private lateinit var eventsAdapter: EventAdapter
-    private lateinit var mainPresenter: MainPresenter
+    @InjectPresenter
+    lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupMVP()
         setupViews()
         getEventList()
     }
@@ -52,10 +55,6 @@ class MainActivity : AppCompatActivity(), MainViewInterface {
         intent.putExtra("details", details)
         intent.putExtra("eventDate", eventDate)
         startActivity(intent)
-    }
-
-    private fun setupMVP() {
-        mainPresenter = MainPresenter(this)
     }
 
     private fun setupViews() {
