@@ -26,6 +26,8 @@ class MainPresenter(private val mvi: MainViewInterface) : MainPresenterInterface
             )
     }
 
+    fun eventClick(event: Event) = mvi.navigateToMain(event.title,event.details,event.eventDate.toString())
+
     private fun getEventsSingle(): Single<List<Event>> {
         return SpaceXService.service()
             .loadEvents()

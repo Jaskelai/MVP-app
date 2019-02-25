@@ -3,7 +3,6 @@ package com.github.kornilovmikhail.mvpandroidproject.ui.main
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.ProgressBar
@@ -13,24 +12,25 @@ import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.ListCallback
 
-class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
+class MainActivity : AppCompatActivity(), MainViewInterface {
 
-    private lateinit var rvEvents: RecyclerView
+    private lateinit var eventsAdapter: EventAdapter
     private lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rvEvents = rv_events
         setupMVP()
         setupViews()
         getEventList()
     }
 
     override fun displayEvents(listEvents: List<Event>) {
-        rvEvents.adapter = EventAdapter(listEvents)
+        eventsAdapter = EventAdapter(listEvents) {
+            mainPresenter.eventClick(it)
+        }
+        rv_events.adapter =  eventsAdapter
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), MainViewInterface, ListCallback {
     }
 
     private fun setupViews() {
-        rvEvents.layoutManager = LinearLayoutManager(this)
+        rv_events.layoutManager = LinearLayoutManager(this)
     }
 
     private fun getEventList() {

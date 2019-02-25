@@ -7,4 +7,5 @@ interface MainViewInterface {
     fun displayError()
     fun showProgressBar()
     fun hideProgressBar()
+    fun navigateToMain(title: String, details: String, eventDate: String)
 }

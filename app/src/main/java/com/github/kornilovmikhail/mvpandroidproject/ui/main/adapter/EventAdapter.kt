@@ -9,14 +9,15 @@ import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
 
-class EventAdapter(items: List<Event>) : RecyclerView.Adapter<EventAdapter.EventHolder>() {
+class EventAdapter(
+    items: List<Event>,
+    private val eventLambda: (Event) -> Unit
+) : RecyclerView.Adapter<EventAdapter.EventHolder>() {
 
     private var events: List<Event> = items
-    private lateinit var listCallback: ListCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
-        listCallback = view.context as ListCallback
         return EventHolder(view)
     }
 
@@ -25,11 +26,7 @@ class EventAdapter(items: List<Event>) : RecyclerView.Adapter<EventAdapter.Event
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
         holder.bind(events[position].title)
         holder.itemView.setOnClickListener {
-            listCallback.navigateToMain(
-                events[position].title,
-                events[position].details,
-                events[position].eventDate.toString()
-            )
+            eventLambda.invoke(events[position])
         }
     }
 
