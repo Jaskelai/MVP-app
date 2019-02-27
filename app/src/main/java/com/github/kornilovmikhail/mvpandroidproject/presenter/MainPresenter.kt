@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXService
-import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
+import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,7 +33,7 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     private fun getEventsSingle(): Single<List<Event>> {
         return SpaceXService.service()
-            .loadEvents()
+            .loadEvents(0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

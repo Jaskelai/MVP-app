@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.data.network.model
+package com.github.kornilovmikhail.mvpandroidproject.data.network.response
 
 import com.google.gson.annotations.SerializedName
 

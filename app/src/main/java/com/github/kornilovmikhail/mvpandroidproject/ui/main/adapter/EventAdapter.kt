@@ -1,18 +1,20 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter
 
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.data.network.model.Event
+import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
 
 class EventAdapter(
     items: List<Event>,
     private val eventLambda: (Event) -> Unit
-) : RecyclerView.Adapter<EventAdapter.EventHolder>() {
+) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
 
     private var events: List<Event> = items
 
@@ -27,6 +29,16 @@ class EventAdapter(
         holder.bind(events[position].title)
         holder.itemView.setOnClickListener {
             eventLambda.invoke(events[position])
+        }
+    }
+
+    class EventDiffCallback : DiffUtil.ItemCallback<Event>() {
+        override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
+            return oldItem == newItem
         }
     }
 
