@@ -4,9 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.arellomobile.mvp.MvpActivity
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
@@ -16,7 +17,7 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.OnScrollListener
 
 
-class MainActivity : MvpActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
@@ -27,6 +28,7 @@ class MainActivity : MvpActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        setSupportActionBar(main_toolbar as Toolbar?)
         mainPresenter.getEvents(0)
     }
 
