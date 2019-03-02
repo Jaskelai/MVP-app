@@ -15,12 +15,15 @@ import io.reactivex.schedulers.Schedulers
 class MainPresenter : MvpPresenter<MainView>() {
 
     @SuppressLint("CheckResult")
-    fun getEvents() {
-        getEventsSingle()
+    fun getEvents(offset: Int) {
+        getEventsSingle(offset)
             .doOnSubscribe { viewState.showProgressBar() }
             .doAfterTerminate { viewState.hideProgressBar() }
             .subscribeBy(
                 onSuccess = {
+                    if (it.isEmpty()) {
+                        viewState.detachOnScrollListeners()
+                    }
                     viewState.displayEvents(it)
                 },
                 onError = {
@@ -31,9 +34,9 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     fun eventClick(event: Event) = viewState.navigateToMain(event.title, event.details, event.eventDate.toString())
 
-    private fun getEventsSingle(): Single<List<Event>> {
+    private fun getEventsSingle(offset: Int): Single<List<Event>> {
         return SpaceXService.service()
-            .loadEvents(0)
+            .loadEvents(offset)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

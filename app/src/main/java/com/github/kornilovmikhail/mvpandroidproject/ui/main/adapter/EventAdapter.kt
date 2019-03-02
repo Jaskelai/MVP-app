@@ -16,7 +16,13 @@ class EventAdapter(
     private val eventLambda: (Event) -> Unit
 ) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
 
-    private var events: List<Event> = items
+    companion object {
+        private var events: MutableList<Event> = mutableListOf()
+    }
+
+    init {
+        events.addAll(items)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)

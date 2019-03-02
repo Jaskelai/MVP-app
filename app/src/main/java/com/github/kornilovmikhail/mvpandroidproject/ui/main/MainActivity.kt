@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpActivity
@@ -14,37 +13,35 @@ import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
+import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.OnScrollListener
 
 
 class MainActivity : MvpActivity(), MainView {
 
-    private lateinit var eventsAdapter: EventAdapter
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
+    private lateinit var onScrollListener: OnScrollListener
+    private lateinit var eventsAdapter: EventAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
-        getEventList()
-//        rv_events.addOnScrollListener(rvOnScrollListener)
+        mainPresenter.getEvents(0)
     }
-
-//    private val rvOnScrollListener = object : RecyclerView.OnScrollListener() {
-//
-//        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//            super.onScrolled(recyclerView, dx, dy)
-//            val visibleItemCount = recyclerView.layoutManager?.childCount
-//            val totalItemCount = recyclerView.layoutManager?.itemCount
-//            val firstVisibleItemPosition = recyclerView.layoutManager?.
-//        }
-//    }
 
     override fun displayEvents(listEvents: List<Event>) {
         eventsAdapter = EventAdapter(listEvents) {
             mainPresenter.eventClick(it)
         }
         rv_events.adapter = eventsAdapter
+        onScrollListener = OnScrollListener(
+            rv_events.layoutManager as LinearLayoutManager
+        ) {
+            mainPresenter.getEvents(it)
+            println("GETEVENTS $it")
+        }
+        rv_events.addOnScrollListener(onScrollListener)
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
 
@@ -60,6 +57,10 @@ class MainActivity : MvpActivity(), MainView {
         progressBar.visibility = ProgressBar.INVISIBLE
     }
 
+    override fun detachOnScrollListeners() {
+        rv_events.removeOnScrollListener(onScrollListener)
+    }
+
     override fun navigateToMain(title: String, details: String, eventDate: String) {
         val intent = Intent(this@MainActivity, DetailsActivity::class.java)
         intent.putExtra("title", title)
@@ -70,9 +71,5 @@ class MainActivity : MvpActivity(), MainView {
 
     private fun setupViews() {
         rv_events.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun getEventList() {
-        mainPresenter.getEvents()
     }
 }

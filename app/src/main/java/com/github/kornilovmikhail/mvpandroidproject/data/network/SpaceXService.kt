@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object SpaceXService {
-    const val BASE_URL = "https://api.spacexdata.com/v3/"
+    private const val BASE_URL = "https://api.spacexdata.com/v3/"
 
     fun service(): SpaceXAPI {
         val okHttpClient = OkHttpClient.Builder()
