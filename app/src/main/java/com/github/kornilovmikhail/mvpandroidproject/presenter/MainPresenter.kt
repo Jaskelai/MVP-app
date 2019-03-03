@@ -19,9 +19,10 @@ class MainPresenter : MvpPresenter<MainView>() {
         if (offset > 0) {
             getEventsFromNetwork(offset)
         } else {
-            EventsDBRepo().getEvents()
+            EventsDBRepo.getEvents()
                 .subscribeBy(
                     onSuccess = {
+                        println(it)
                         if (it.isEmpty()) {
                             getEventsFromNetwork(offset)
                         } else {
@@ -29,6 +30,7 @@ class MainPresenter : MvpPresenter<MainView>() {
                                 TempEvents.events.addAll(it)
                             }
                             viewState.displayEvents(TempEvents.events)
+                            viewState.hideProgressBar()
                         }
                     }
                 )
@@ -38,17 +40,20 @@ class MainPresenter : MvpPresenter<MainView>() {
     @SuppressLint("CheckResult")
     private fun getEventsFromNetwork(offset: Int) {
         EventsNetworkRepo.getEvents(offset)
-            .doOnSubscribe { viewState.showProgressBar() }
-            .doAfterTerminate { viewState.hideProgressBar() }
+            .doOnSubscribe {
+                viewState.showProgressBar() }
+            .doAfterTerminate {
+                viewState.hideProgressBar() }
             .subscribeBy(
                 onSuccess = {
                     if (it.isEmpty()) {
                         viewState.detachOnScrollListeners()
                     }
                     if (!TempEvents.events.containsAll(it)) {
-                        EventsDBRepo().saveEvents(it)
+                        EventsDBRepo.saveEvents(it)
                         TempEvents.events.addAll(it)
                         viewState.displayEvents(TempEvents.events)
+                        viewState.displaySuccess()
                     }
                 },
                 onError = {

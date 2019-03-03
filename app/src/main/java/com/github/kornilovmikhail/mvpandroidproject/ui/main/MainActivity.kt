@@ -47,6 +47,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             rv_events.adapter = eventsAdapter
         }
         eventsAdapter?.submitList(listEvents)
+    }
+
+    override fun displaySuccess() {
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
 

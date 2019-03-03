@@ -5,6 +5,7 @@ import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 
 interface MainView : MvpView {
     fun displayEvents(listEvents: List<Event>)
+    fun displaySuccess()
     fun displayError()
     fun showProgressBar()
     fun hideProgressBar()
