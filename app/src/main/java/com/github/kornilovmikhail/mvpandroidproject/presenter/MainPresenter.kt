@@ -1,8 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject.presenter
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.TempEvents
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
@@ -60,6 +62,11 @@ class MainPresenter : MvpPresenter<MainView>() {
                     viewState.displayError()
                 }
             )
+    }
+
+    fun getSharedPrefs(sharedPreferences: SharedPreferences) : Int {
+        Pagination.setSharedPrefs(sharedPreferences)
+        return Pagination.getCurrentPagination()
     }
 
     fun eventClick(event: Event) = viewState.navigateToMain(event.title, event.details, event.eventDate.toString())

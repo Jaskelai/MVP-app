@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Links(
-    @PrimaryKey(autoGenerate = true) var id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     @SerializedName("reddit") val linkReddit: String?,
     @SerializedName("article") val linkArticle: String?,
     @SerializedName("wikipedia") val linkWikipedia: String?

@@ -23,8 +23,7 @@ abstract class EventDatabase : RoomDatabase() {
                     context,
                     EventDatabase::class.java,
                     DATABASE_NAME
-                )
-                    .build()
+                ).build()
             }
             return instance as EventDatabase
         }

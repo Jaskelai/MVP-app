@@ -1,10 +1,13 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -21,6 +24,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
     private var eventsAdapter: EventAdapter? = null
+    private val name_sharedprefs: String = "Pagination"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setupViews()
         setSupportActionBar(main_toolbar as Toolbar?)
         mainPresenter.getEvents(0)
+        mainPresenter.getSharedPrefs(getSharedPreferences(name_sharedprefs, Context.MODE_PRIVATE))
     }
 
     private fun setupViews() {
@@ -75,5 +81,17 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         intent.putExtra("details", details)
         intent.putExtra("eventDate", eventDate)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // R.id.action_pagination ->
+        }
+        return true
     }
 }

@@ -2,4 +2,5 @@
     <string name="app_name">MVPAndroidProject</string>
     <string name="server_events_error">Can\'t load events</string>
     <string name="server_events_success">Events loaded</string>
+    <string name="pagination">Pagination</string>
 </resources>
