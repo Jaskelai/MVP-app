@@ -7,22 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
 
+
 class EventAdapter(
-    items: List<Event>,
+    private val events: List<Event>,
     private val eventLambda: (Event) -> Unit
 ) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
-
-    companion object {
-        private var events: MutableList<Event> = mutableListOf()
-    }
-
-    init {
-        events.addAll(items)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
@@ -36,6 +29,10 @@ class EventAdapter(
         holder.itemView.setOnClickListener {
             eventLambda.invoke(events[position])
         }
+    }
+
+    override fun submitList(list: List<Event>?) {
+        super.submitList(if (list != null) ArrayList(list) else null)
     }
 
     class EventDiffCallback : DiffUtil.ItemCallback<Event>() {

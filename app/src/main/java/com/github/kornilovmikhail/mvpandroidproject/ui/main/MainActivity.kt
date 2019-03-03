@@ -10,19 +10,17 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.OnScrollListener
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
-    private lateinit var onScrollListener: OnScrollListener
-    private lateinit var eventsAdapter: EventAdapter
+    private var eventsAdapter: EventAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +30,23 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         mainPresenter.getEvents(0)
     }
 
-    override fun displayEvents(listEvents: List<Event>) {
-        eventsAdapter = EventAdapter(listEvents) {
-            mainPresenter.eventClick(it)
-        }
-        rv_events.adapter = eventsAdapter
-        onScrollListener = OnScrollListener(
+    private fun setupViews() {
+        rv_events.layoutManager = LinearLayoutManager(this)
+        rv_events.addOnScrollListener(OnScrollListener(
             rv_events.layoutManager as LinearLayoutManager
         ) {
             mainPresenter.getEvents(it)
-            println("GETEVENTS $it")
+        })
+    }
+
+    override fun displayEvents(listEvents: List<Event>) {
+        if (eventsAdapter == null) {
+            eventsAdapter = EventAdapter(listEvents) {
+                mainPresenter.eventClick(it)
+            }
+            rv_events.adapter = eventsAdapter
         }
-        rv_events.addOnScrollListener(onScrollListener)
+        eventsAdapter?.submitList(listEvents)
         Toast.makeText(this, getString(R.string.server_events_success), Toast.LENGTH_SHORT).show()
     }
 
@@ -60,7 +63,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun detachOnScrollListeners() {
-        rv_events.removeOnScrollListener(onScrollListener)
+        rv_events.clearOnScrollListeners()
     }
 
     override fun navigateToMain(title: String, details: String, eventDate: String) {
@@ -69,9 +72,5 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         intent.putExtra("details", details)
         intent.putExtra("eventDate", eventDate)
         startActivity(intent)
-    }
-
-    private fun setupViews() {
-        rv_events.layoutManager = LinearLayoutManager(this)
     }
 }

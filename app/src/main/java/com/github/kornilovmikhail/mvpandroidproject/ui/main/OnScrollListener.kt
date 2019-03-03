@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter
+package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -11,7 +11,7 @@ class OnScrollListener(
     companion object {
         private var previousTotal = 0
         private var loading = true
-        private val visibleThreshold = 12
+        private val visibleThreshold = 0
         private var firstVisibleItem = 0
         private var visibleItemCount = 0
         private var totalItemCount = 0
@@ -27,7 +27,9 @@ class OnScrollListener(
         if (loading) {
             if (totalItemCount > previousTotal) {
                 loading = false
-                previousTotal = totalItemCount
+                previousTotal =
+                    totalItemCount
+
             }
         }
 

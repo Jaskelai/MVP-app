@@ -1,9 +1,9 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main
 
 import com.arellomobile.mvp.MvpView
-import com.github.kornilovmikhail.mvpandroidproject.data.network.response.Event
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 
-interface MainView : MvpView{
+interface MainView : MvpView {
     fun displayEvents(listEvents: List<Event>)
     fun displayError()
     fun showProgressBar()
