@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "eventData")
 data class Event(
-    @ColumnInfo(index = true) @PrimaryKey(autoGenerate = true) var id: Int,
+    @ColumnInfo(index = true) @PrimaryKey(autoGenerate = true) val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("event_date_unix") @ColumnInfo(name = "event_date") val eventDate: Long,
     @SerializedName("flight_number") @ColumnInfo(name = "flight_name") val flightNumber: Int?,

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SpaceXAPI {
-    @GET("history?limit=15")
-    fun loadEvents(@Query("offset") offset: Int): Single<List<Event>>
+    @GET("history")
+    fun loadEvents(@Query("offset") offset: Int, @Query("limit") limit: Int): Single<List<Event>>
 }
