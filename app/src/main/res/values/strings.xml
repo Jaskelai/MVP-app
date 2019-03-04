@@ -7,4 +7,6 @@
     <string name="label_type_your_pagination">type your pagination</string>
     <string name="label_submit">Submit</string>
     <string name="label_cancel">Cancel</string>
+    <string name="links">Links</string>
+    <string name="none">none</string>
 </resources>
