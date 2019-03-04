@@ -17,9 +17,7 @@ object Pagination {
     }
 
     fun getCurrentPagination(): Int {
-        val value = 0
-        preferences.getInt(NAME_PAGINATION, value)
-        return value
+        return preferences.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
     }
 
 }
