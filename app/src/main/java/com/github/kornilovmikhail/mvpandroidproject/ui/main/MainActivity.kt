@@ -16,11 +16,8 @@ import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
-import android.widget.EditText
-import android.support.v7.app.AlertDialog
-import android.widget.Button
 import com.github.kornilovmikhail.mvpandroidproject.R
-import kotlinx.android.synthetic.main.pagination_dialog.*
+import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
@@ -92,27 +89,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            com.github.kornilovmikhail.mvpandroidproject.R.id.action_pagination -> createDialog()
+            R.id.action_pagination -> createDialog()
         }
         return true
     }
 
     private fun createDialog() {
-        val dialogBuilder = AlertDialog.Builder(this).create()
-        val inflater = this.layoutInflater
-        val dialogView = inflater.inflate(R.layout.pagination_dialog, null)
-
-        val editText = edt_pagination as EditText
-        val btnSubmit = btn_Submit as Button
-        val button2 = btn_Cancel as Button
-
-        button2.setOnClickListener { dialogBuilder.dismiss() }
-        btnSubmit.setOnClickListener {
-            mainPresenter.setSharedPrefs(editText.text.toString().toInt())
-            dialogBuilder.dismiss()
-        }
-
-        dialogBuilder.setView(dialogView)
-        dialogBuilder.show()
+        val dialog = PaginationDialog()
+        dialog.show(supportFragmentManager,"custom")
     }
 }
