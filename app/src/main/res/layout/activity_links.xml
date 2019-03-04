@@ -67,7 +67,7 @@
             android:layout_marginStart="28dp"/>
     <TextView
             android:id="@+id/tv_link_wiki"
-            android:text="@string/none"
+            android:text="TextView"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
