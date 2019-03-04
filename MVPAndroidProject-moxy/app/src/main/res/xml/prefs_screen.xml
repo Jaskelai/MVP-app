@@ -1,9 +1,0 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference
-            android:id="@+id/pagin_size"
-            android:key="pagin_size"
-            android:title="Pagination size"
-            android:summary="set pagination size"
-            android:dialogMessage="Dialog Message"
-            android:defaultValue="Default value" />
-</PreferenceScreen>

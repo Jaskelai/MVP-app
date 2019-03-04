@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.detail.DetailsActivity"/>
+        <activity android:name=".ui.links.LinksActivity"/>
     </application>
 
 </manifest>
