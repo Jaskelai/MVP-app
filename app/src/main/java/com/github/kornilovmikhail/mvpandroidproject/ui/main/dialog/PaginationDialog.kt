@@ -22,12 +22,12 @@ class PaginationDialog : MvpAppCompatDialogFragment(),PaginationDialogView {
                 .setPositiveButton(
                     R.string.label_submit
                 ) { dialog, _ ->
+                    paginationPresenter.setPagination(edt_pagination.text.toString().toInt())
                     dialog.dismiss()
                 }
                 .setNegativeButton(
                     R.string.label_cancel
                 ) { dialog, _ ->
-                    paginationPresenter.setPagination(edt_pagination.text.toString().toInt())
                     dialog.dismiss()
                 }
             builder.create()
