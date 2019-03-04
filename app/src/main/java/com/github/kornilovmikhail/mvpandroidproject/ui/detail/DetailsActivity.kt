@@ -26,7 +26,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     }
 
     private fun setupViews() {
-        setSupportActionBar(main_toolbar as Toolbar?)
+        setSupportActionBar(detail_toolbar as Toolbar?)
         position = intent.getIntExtra("position", 0)
         detailPresenter.getEvent(position)
 

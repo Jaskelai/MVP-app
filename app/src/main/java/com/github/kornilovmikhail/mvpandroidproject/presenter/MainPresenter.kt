@@ -24,7 +24,6 @@ class MainPresenter : MvpPresenter<MainView>() {
             EventsDBRepo.getEvents()
                 .subscribeBy(
                     onSuccess = {
-                        println(it)
                         if (it.isEmpty()) {
                             getEventsFromNetwork(offset)
                         } else {

@@ -4,7 +4,10 @@
                                              xmlns:tools="http://schemas.android.com/tools"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent">
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"
+             android:id="@+id/detail_toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"/>
 
     <TextView
             android:id="@+id/tv_title_details_activity"
