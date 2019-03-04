@@ -79,11 +79,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         rv_events.clearOnScrollListeners()
     }
 
-    override fun navigateToMain(title: String, details: String, eventDate: String) {
+    override fun navigateToMain(position: Int) {
         val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-        intent.putExtra("title", title)
-        intent.putExtra("details", details)
-        intent.putExtra("eventDate", eventDate)
+        intent.putExtra("position", position)
         startActivity(intent)
     }
 

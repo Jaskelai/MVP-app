@@ -9,6 +9,6 @@ interface MainView : MvpView {
     fun displayError()
     fun showProgressBar()
     fun hideProgressBar()
-    fun navigateToMain(title: String, details: String, eventDate: String)
+    fun navigateToMain(position: Int)
     fun detachOnScrollListeners()
 }

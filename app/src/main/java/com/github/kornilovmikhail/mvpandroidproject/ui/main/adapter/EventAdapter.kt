@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.event_list_item.view.*
 
 class EventAdapter(
     private val events: List<Event>,
-    private val eventLambda: (Event) -> Unit
+    private val eventLambda: (Int) -> Unit
 ) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
@@ -27,7 +27,7 @@ class EventAdapter(
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
         holder.bind(events[position].title)
         holder.itemView.setOnClickListener {
-            eventLambda.invoke(events[position])
+            eventLambda.invoke(position)
         }
     }
 

@@ -72,6 +72,6 @@ class MainPresenter : MvpPresenter<MainView>() {
         Pagination.setCurrentPagination(value)
     }
 
-    fun eventClick(event: Event) = viewState.navigateToMain(event.title, event.details, event.eventDate.toString())
+    fun eventClick(position: Int) = viewState.navigateToMain(position)
 
 }
