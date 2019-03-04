@@ -3,4 +3,8 @@
     <string name="server_events_error">Can\'t load events</string>
     <string name="server_events_success">Events loaded</string>
     <string name="pagination">Pagination</string>
+    <string name="label_dialog">Pagination</string>
+    <string name="label_type_your_pagination">type your pagination</string>
+    <string name="label_submit">Submit</string>
+    <string name="label_cancel">Cancel</string>
 </resources>

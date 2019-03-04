@@ -12,11 +12,15 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
+import android.widget.EditText
+import android.support.v7.app.AlertDialog
+import android.widget.Button
+import com.github.kornilovmikhail.mvpandroidproject.R
+import kotlinx.android.synthetic.main.pagination_dialog.*
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
@@ -24,16 +28,15 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
     private var eventsAdapter: EventAdapter? = null
-    private val name_sharedprefs: String = "Pagination"
+    private val nameSharedprefs: String = "Pagination"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
-        setSupportActionBar(main_toolbar as Toolbar?)
         mainPresenter.getEvents(0)
-        mainPresenter.getSharedPrefs(getSharedPreferences(name_sharedprefs, Context.MODE_PRIVATE))
+        mainPresenter.initSharedPrefs(getSharedPreferences(nameSharedprefs, Context.MODE_PRIVATE))
     }
 
     private fun setupViews() {
@@ -43,6 +46,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         ) {
             mainPresenter.getEvents(it)
         })
+        setSupportActionBar(main_toolbar as Toolbar?)
     }
 
     override fun displayEvents(listEvents: List<Event>) {
@@ -90,8 +94,27 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            // R.id.action_pagination ->
+            com.github.kornilovmikhail.mvpandroidproject.R.id.action_pagination -> createDialog()
         }
         return true
+    }
+
+    private fun createDialog() {
+        val dialogBuilder = AlertDialog.Builder(this).create()
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.pagination_dialog, null)
+
+        val editText = edt_pagination as EditText
+        val btnSubmit = btn_Submit as Button
+        val button2 = btn_Cancel as Button
+
+        button2.setOnClickListener { dialogBuilder.dismiss() }
+        btnSubmit.setOnClickListener {
+            mainPresenter.setSharedPrefs(editText.text.toString().toInt())
+            dialogBuilder.dismiss()
+        }
+
+        dialogBuilder.setView(dialogView)
+        dialogBuilder.show()
     }
 }

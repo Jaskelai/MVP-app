@@ -64,9 +64,12 @@ class MainPresenter : MvpPresenter<MainView>() {
             )
     }
 
-    fun getSharedPrefs(sharedPreferences: SharedPreferences) : Int {
+    fun initSharedPrefs(sharedPreferences: SharedPreferences) {
         Pagination.setSharedPrefs(sharedPreferences)
-        return Pagination.getCurrentPagination()
+    }
+
+    fun setSharedPrefs(value: Int) {
+        Pagination.setCurrentPagination(value)
     }
 
     fun eventClick(event: Event) = viewState.navigateToMain(event.title, event.details, event.eventDate.toString())
