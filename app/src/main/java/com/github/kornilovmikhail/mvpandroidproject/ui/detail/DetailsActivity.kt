@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +17,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
 
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
+    private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,8 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
 
     private fun setupViews() {
         setSupportActionBar(main_toolbar as Toolbar?)
-        detailPresenter.getEvent(intent.getIntExtra("position", 0))
+        position = intent.getIntExtra("position", 0)
+        detailPresenter.getEvent(position)
 
     }
 
@@ -40,21 +43,16 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
         tv_event_date_details_activity.text = date
     }
 
-    //
-    //
-    //нужны аргументы в метод navigateToLinks(.....)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            com.github.kornilovmikhail.mvpandroidproject.R.id.action_open_links -> navigateToLinks()
+            R.id.action_open_links -> navigateToLinks(position)
         }
         return true
     }
 
-    override fun navigateToLinks(reddit: String?, article: String?, wiki: String?) {
-        val intent = Intent(this@DetailsActivity, DetailsActivity::class.java)
-        intent.putExtra("reddit", reddit)
-        intent.putExtra("article", article)
-        intent.putExtra("wiki", wiki)
+    private fun navigateToLinks(position: Int) {
+        val intent = Intent(this@DetailsActivity, LinksActivity::class.java)
+        intent.putExtra("position", position)
         startActivity(intent)
     }
 }
