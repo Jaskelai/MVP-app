@@ -16,7 +16,5 @@ object Pagination {
         preferences?.edit()?.putInt(NAME_PAGINATION, pagination)?.apply()
     }
 
-    fun getCurrentPagination(): Int? {
-        return preferences?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
-    }
+    fun getCurrentPagination(): Int? = preferences?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
 }

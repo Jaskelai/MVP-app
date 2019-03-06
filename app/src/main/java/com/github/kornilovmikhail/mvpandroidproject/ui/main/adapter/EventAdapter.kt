@@ -35,13 +35,10 @@ class EventAdapter(
     }
 
     class EventDiffCallback : DiffUtil.ItemCallback<Event>() {
-        override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
-            return oldItem.title == newItem.title
-        }
+        override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean = oldItem.title == newItem.title
 
-        override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean = oldItem == newItem
+
     }
 
     class EventHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
