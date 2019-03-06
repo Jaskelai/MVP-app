@@ -2,6 +2,7 @@ package com.github.kornilovmikhail.mvpandroidproject
 
 import android.app.Application
 import android.content.Context
+import kotlin.properties.Delegates
 
 class MyApplication : Application() {
 
@@ -11,7 +12,7 @@ class MyApplication : Application() {
     }
 
     companion object {
-        lateinit var appContext: Context
+        var appContext: Context by Delegates.notNull()
             private set
     }
 }
