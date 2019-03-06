@@ -8,7 +8,6 @@ import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
-import kotlinx.android.synthetic.main.pagination_dialog.*
 
 class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
 
