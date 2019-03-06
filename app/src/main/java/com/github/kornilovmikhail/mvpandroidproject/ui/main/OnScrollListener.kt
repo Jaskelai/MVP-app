@@ -33,7 +33,7 @@ class OnScrollListener(
             }
         }
 
-        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+        if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem + visibleThreshold) {
             eventLambda.invoke(totalItemCount)
             loading = true
         }

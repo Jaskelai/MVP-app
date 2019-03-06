@@ -11,7 +11,6 @@ import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
 
-
 class EventAdapter(
     private val events: List<Event>,
     private val eventLambda: (Int) -> Unit

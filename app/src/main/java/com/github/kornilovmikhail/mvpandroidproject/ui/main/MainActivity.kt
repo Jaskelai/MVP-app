@@ -19,7 +19,6 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
 
-
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     @InjectPresenter
@@ -96,6 +95,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private fun createDialog() {
         val dialog = PaginationDialog()
-        dialog.show(supportFragmentManager,"custom")
+        dialog.show(supportFragmentManager, "custom")
     }
 }
