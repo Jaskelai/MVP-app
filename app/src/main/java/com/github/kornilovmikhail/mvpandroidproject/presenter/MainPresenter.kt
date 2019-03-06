@@ -6,11 +6,9 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.TempEvents
-import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
-import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
@@ -42,9 +40,11 @@ class MainPresenter : MvpPresenter<MainView>() {
     private fun getEventsFromNetwork(offset: Int) {
         EventsNetworkRepo.getEvents(offset)
             .doOnSubscribe {
-                viewState.showProgressBar() }
+                viewState.showProgressBar()
+            }
             .doAfterTerminate {
-                viewState.hideProgressBar() }
+                viewState.hideProgressBar()
+            }
             .subscribeBy(
                 onSuccess = {
                     if (it.isEmpty()) {
