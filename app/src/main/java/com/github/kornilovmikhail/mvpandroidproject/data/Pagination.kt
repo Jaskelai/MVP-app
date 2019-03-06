@@ -19,5 +19,4 @@ object Pagination {
     fun getCurrentPagination(): Int? {
         return preferences?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
     }
-
 }

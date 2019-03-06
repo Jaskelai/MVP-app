@@ -8,7 +8,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-object EventsDBRepo  {
+object EventsDBRepo {
 
     private val eventDatabase: EventDatabase = EventDatabase.getInstance(MyApplication.appContext)
 
@@ -24,5 +24,4 @@ object EventsDBRepo  {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
-
 }
