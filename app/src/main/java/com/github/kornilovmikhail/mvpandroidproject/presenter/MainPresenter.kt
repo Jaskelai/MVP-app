@@ -20,6 +20,12 @@ class MainPresenter : MvpPresenter<MainView>() {
             getEventsFromNetwork(offset)
         } else {
             EventsDBRepo.getEvents()
+                .doOnSubscribe {
+                    viewState.showProgressBar()
+                }
+                .doAfterTerminate {
+                    viewState.hideProgressBar()
+                }
                 .subscribeBy(
                     onSuccess = {
                         if (it.isEmpty()) {
@@ -29,9 +35,9 @@ class MainPresenter : MvpPresenter<MainView>() {
                                 TempEvents.events.addAll(it)
                             }
                             viewState.displayEvents(TempEvents.events)
-                            viewState.hideProgressBar()
                         }
-                    }
+                    },
+                    onError = {}
                 )
         }
     }
@@ -63,14 +69,9 @@ class MainPresenter : MvpPresenter<MainView>() {
             )
     }
 
-    fun initSharedPrefs(sharedPreferences: SharedPreferences) {
-        Pagination.setSharedPrefs(sharedPreferences)
-    }
+    fun initSharedPrefs(sharedPreferences: SharedPreferences) = Pagination.setSharedPrefs(sharedPreferences)
 
-    fun setSharedPrefs(value: Int) {
-        Pagination.setCurrentPagination(value)
-    }
+    fun setSharedPrefs(value: Int) = Pagination.setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
-
 }

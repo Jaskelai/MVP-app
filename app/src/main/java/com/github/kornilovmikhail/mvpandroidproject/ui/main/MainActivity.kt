@@ -26,6 +26,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private var eventsAdapter: EventAdapter? = null
     private val nameSharedprefs: String = "Pagination"
 
+    companion object {
+        const val EXTRA_POSITION: String = "position"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +75,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         progressBar.visibility = ProgressBar.INVISIBLE
     }
 
-    override fun detachOnScrollListeners() {
-        rv_events.clearOnScrollListeners()
-    }
+    override fun detachOnScrollListeners() = rv_events.clearOnScrollListeners()
 
     override fun navigateToMain(position: Int) {
         val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-        intent.putExtra("position", position)
+        intent.putExtra(EXTRA_POSITION, position)
         startActivity(intent)
     }
 

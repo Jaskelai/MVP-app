@@ -22,18 +22,22 @@ class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
                 .setView(v)
                 .setPositiveButton(
                     R.string.label_submit
-                ) { dialog, _ ->
+                ) { _, _ ->
                     paginationPresenter.setPagination(
                         v?.findViewById<EditText>(R.id.edt_pagination)?.text.toString().toInt()
                     )
-                    dialog.dismiss()
+                    paginationPresenter.dismiss()
                 }
                 .setNegativeButton(
                     R.string.label_cancel
-                ) { dialog, _ ->
-                    dialog.dismiss()
+                ) { _, _ ->
+                    paginationPresenter.dismiss()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
+    }
+
+    override fun hideDialog() {
+        dialog.dismiss()
     }
 }

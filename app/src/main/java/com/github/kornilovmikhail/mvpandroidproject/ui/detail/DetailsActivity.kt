@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,6 +19,9 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
     private var position: Int = 0
+    companion object {
+        const val EXTRA_POSITION: String = "position"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
 
     private fun setupViews() {
         setSupportActionBar(detail_toolbar as Toolbar?)
-        position = intent.getIntExtra("position", 0)
+        position = intent.getIntExtra(MainActivity.EXTRA_POSITION, 0)
         detailPresenter.getEvent(position)
 
     }
@@ -52,7 +56,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
 
     private fun navigateToLinks(position: Int) {
         val intent = Intent(this@DetailsActivity, LinksActivity::class.java)
-        intent.putExtra("position", position)
+        intent.putExtra(EXTRA_POSITION, position)
         startActivity(intent)
     }
 }

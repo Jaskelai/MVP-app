@@ -17,11 +17,9 @@ object EventsDBRepo {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun saveEvents(events: List<Event>) {
+    fun saveEvents(events: List<Event>): Completable =
         Completable.fromAction {
             eventDatabase.eventDao().insertEvents(events)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-    }
 }

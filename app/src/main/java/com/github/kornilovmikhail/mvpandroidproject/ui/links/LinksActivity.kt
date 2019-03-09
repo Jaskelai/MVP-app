@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import kotlinx.android.synthetic.main.activity_links.*
 
 class LinksActivity : MvpAppCompatActivity(), LinksView {
@@ -19,24 +20,12 @@ class LinksActivity : MvpAppCompatActivity(), LinksView {
     }
 
     private fun setupViews() {
-        linksPresenter.getLinks(intent.getIntExtra("position", 0))
+        linksPresenter.getLinks(intent.getIntExtra(DetailsActivity.EXTRA_POSITION, 0))
     }
 
     override fun setText(article: String?, reddit: String?, wikipedia: String?) {
-        if (article == null) {
-            tv_link_article.text = getString(R.string.none)
-        } else {
-            tv_link_article.text = article
-        }
-        if (reddit == null) {
-            tv_link_reddit.text = getString(R.string.none)
-        } else {
-            tv_link_reddit.text = reddit
-        }
-        if (wikipedia == null) {
-            tv_link_wiki.text = getString(R.string.none)
-        } else {
-            tv_link_wiki.text = wikipedia
-        }
+        tv_link_article.text = article ?: getString(R.string.none)
+        tv_link_reddit.text = reddit ?: getString(R.string.none)
+        tv_link_wiki.text = wikipedia ?: getString(R.string.none)
     }
 }

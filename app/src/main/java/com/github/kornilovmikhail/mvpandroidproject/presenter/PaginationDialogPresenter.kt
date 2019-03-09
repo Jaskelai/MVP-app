@@ -10,4 +10,8 @@ class PaginationDialogPresenter : MvpPresenter<PaginationDialogView>() {
     fun setPagination(pagination: Int) {
         Pagination.setCurrentPagination(pagination)
     }
+
+    fun dismiss() {
+        viewState.hideDialog()
+    }
 }

@@ -1,5 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog
 
 import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
-interface PaginationDialogView : MvpView
+@StateStrategyType(value = AddToEndSingleStrategy::class)
+interface PaginationDialogView : MvpView {
+    fun hideDialog()
+}
