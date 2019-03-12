@@ -97,20 +97,21 @@ class MainPresenterTest {
     @Test
     fun testSaveSharedPrefs() {
         //Arrange
+        val expectedNumber = 4
         //Act
-        mainPresenter.setSharedPrefs(4)
+        mainPresenter.setSharedPrefs(expectedNumber)
         //Assert
-        verify(mockPagination).setCurrentPagination(4)
+        verify(mockPagination).setCurrentPagination(expectedNumber)
     }
 
     @Test
     fun testEventClick() {
         //Arrange
-        val position = 2
+        val expectedPosition = 2
         //Act
-        mainPresenter.eventClick(position)
+        mainPresenter.eventClick(expectedPosition)
         //Assert
-        verify(mockViewState).navigateToMain(position)
+        verify(mockViewState).navigateToMain(expectedPosition)
     }
 
 }

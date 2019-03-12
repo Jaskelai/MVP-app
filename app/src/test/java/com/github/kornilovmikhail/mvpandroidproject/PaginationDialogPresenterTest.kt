@@ -33,11 +33,11 @@ class PaginationDialogPresenterTest {
     @Test
     fun testSetPagination() {
         //Arrange
-        val pagination = 2
+        val expectedPagination = 2
         //Act
-        paginationDialogPresenter.setPagination(pagination)
+        paginationDialogPresenter.setPagination(expectedPagination)
         //Assert
-        Mockito.verify(mockPagination).setCurrentPagination(pagination)
+        Mockito.verify(mockPagination).setCurrentPagination(expectedPagination)
     }
 
     @Test

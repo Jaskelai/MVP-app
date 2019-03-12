@@ -33,12 +33,15 @@ class LinksPresenterTest {
         //Arrange
         val position = 0
         val listEvents = ArrayList<Event>()
+        val expectedArticle = ""
+        val expectedReddit = ""
+        val expectedWikipedia = ""
         val event = Event(0, "", 0, 0, "", Links(0, "", "", ""))
         listEvents.add(event)
         TempEvents.events = listEvents
         //Act
         linksPresenter.getLinks(position)
         //Assert
-        verify(mockViewState).setText("", "", "")
+        verify(mockViewState).setText(expectedArticle, expectedReddit, expectedWikipedia)
     }
 }

@@ -37,6 +37,9 @@ class DetailPresenterTest {
     fun testGetEvent() {
         //Arrange
         val position = 0
+        val expectedTitle = ""
+        val expectedDetails = ""
+        val expectedDate = "0"
         val listEvents = ArrayList<Event>()
         val event = Event(0, "", 0, 0, "", Links(0, "", "", ""))
         listEvents.add(event)
@@ -44,6 +47,6 @@ class DetailPresenterTest {
         //Act
         detailPresenter.getEvent(position)
         //Assert
-        Mockito.verify(mockViewState).setText("", "", "0")
+        Mockito.verify(mockViewState).setText(expectedTitle, expectedDetails, expectedDate)
     }
 }
