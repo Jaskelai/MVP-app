@@ -42,6 +42,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        mainPresenter.getEvents(0)
         mainPresenter.initSharedPrefs(getSharedPreferences(nameSharedprefs, Context.MODE_PRIVATE))
     }
 

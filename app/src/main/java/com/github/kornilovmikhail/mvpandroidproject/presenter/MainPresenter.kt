@@ -15,10 +15,6 @@ class MainPresenter(private val repo: EventsRepo, private val pagination: Pagina
         private const val offsetDefault = 0
     }
 
-    override fun onFirstViewAttach() {
-        getEvents(offsetDefault)
-    }
-
     fun getEvents(offset: Int) {
         repo.getEvents(offset)
             .doOnSubscribe {
@@ -32,8 +28,6 @@ class MainPresenter(private val repo: EventsRepo, private val pagination: Pagina
                     if (it.isEmpty()) {
                         if (offset != offsetDefault) {
                             viewState.detachOnScrollListeners()
-                        } else {
-                            getEvents(offset)
                         }
                     } else {
                         repo.cacheEvents(it)

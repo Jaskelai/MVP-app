@@ -12,8 +12,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
 import org.mockito.Mockito.*
-import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -27,6 +27,9 @@ class MainPresenterTest {
 
     @Mock
     lateinit var mockPagination: Pagination
+
+    @Mock
+    lateinit var mockMainPresenter: MainPresenter
 
     @InjectMocks
     @Spy
@@ -45,8 +48,8 @@ class MainPresenterTest {
         //Act
         mainPresenter.getEvents(offset)
         //Assert
-        verify(mockViewState).detachOnScrollListeners()
         verify(mockViewState).showProgressBar()
+        verify(mockViewState).detachOnScrollListeners()
         verify(mockViewState).hideProgressBar()
     }
 
