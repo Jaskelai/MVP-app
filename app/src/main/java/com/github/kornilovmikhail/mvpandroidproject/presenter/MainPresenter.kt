@@ -1,13 +1,9 @@
 package com.github.kornilovmikhail.mvpandroidproject.presenter
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.TempEvents
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
 import io.reactivex.rxkotlin.subscribeBy
