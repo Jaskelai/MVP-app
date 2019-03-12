@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.data
+package com.github.kornilovmikhail.mvpandroidproject.data.repo
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 

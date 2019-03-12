@@ -30,5 +30,5 @@ data class Event(
 
     @SerializedName("links")
     @Embedded(prefix = "links")
-    val links: Links
+    var links: Links
 )

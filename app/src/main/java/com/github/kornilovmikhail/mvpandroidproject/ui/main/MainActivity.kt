@@ -12,19 +12,25 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    @InjectPresenter
-    lateinit var mainPresenter: MainPresenter
     private var eventsAdapter: EventAdapter? = null
     private val nameSharedprefs: String = "Pagination"
+
+    @InjectPresenter
+    lateinit var mainPresenter: MainPresenter
+
+    @ProvidePresenter
+    fun initPresenter(): MainPresenter = MainPresenter(EventsRepo)
 
     companion object {
         const val EXTRA_POSITION: String = "position"
@@ -35,7 +41,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
-        mainPresenter.getEvents(0)
         mainPresenter.initSharedPrefs(getSharedPreferences(nameSharedprefs, Context.MODE_PRIVATE))
     }
 

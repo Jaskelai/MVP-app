@@ -2,19 +2,22 @@ package com.github.kornilovmikhail.mvpandroidproject.data
 
 import android.content.SharedPreferences
 
-object Pagination {
-    private const val DEFAULT_PAGINATION = 12
-    private const val NAME_PAGINATION = "current_pagination"
-    private var preferences: SharedPreferences? = null
+class Pagination {
+
+    companion object {
+        private const val DEFAULT_PAGINATION = 12
+        private const val NAME_PAGINATION = "current_pagination"
+        private var preference: SharedPreferences? = null
+    }
 
     fun setSharedPrefs(preferences: SharedPreferences) {
-        this.preferences = preferences
+        preference = preferences
         preferences.edit().putInt(NAME_PAGINATION, DEFAULT_PAGINATION).apply()
     }
 
     fun setCurrentPagination(pagination: Int) {
-        preferences?.edit()?.putInt(NAME_PAGINATION, pagination)?.apply()
+        preference?.edit()?.putInt(NAME_PAGINATION, pagination)?.apply()
     }
 
-    fun getCurrentPagination(): Int? = preferences?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
+    fun getCurrentPagination(): Int? = preference?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
 }

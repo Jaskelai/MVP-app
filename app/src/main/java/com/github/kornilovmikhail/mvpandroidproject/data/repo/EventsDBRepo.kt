@@ -9,7 +9,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 object EventsDBRepo {
-
     private val eventDatabase: EventDatabase = EventDatabase.getInstance(MyApplication.appContext)
 
     fun getEvents(): Single<List<Event>> =

@@ -5,46 +5,26 @@ import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
-import com.github.kornilovmikhail.mvpandroidproject.data.TempEvents
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.TempEvents
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class MainPresenter : MvpPresenter<MainView>() {
+class MainPresenter(private val repo: EventsRepo) : MvpPresenter<MainView>() {
 
-    @SuppressLint("CheckResult")
-    fun getEvents(offset: Int) {
-        if (offset > 0) {
-            getEventsFromNetwork(offset)
-        } else {
-            EventsDBRepo.getEvents()
-                .doOnSubscribe {
-                    viewState.showProgressBar()
-                }
-                .doAfterTerminate {
-                    viewState.hideProgressBar()
-                }
-                .subscribeBy(
-                    onSuccess = {
-                        if (it.isEmpty()) {
-                            getEventsFromNetwork(offset)
-                        } else {
-                            if (!TempEvents.events.containsAll(it)) {
-                                TempEvents.events.addAll(it)
-                            }
-                            viewState.displayEvents(TempEvents.events)
-                        }
-                    },
-                    onError = {}
-                )
-        }
+    companion object {
+        private const val offsetDefault = 0
     }
 
-    @SuppressLint("CheckResult")
-    private fun getEventsFromNetwork(offset: Int) {
-        EventsNetworkRepo.getEvents(offset)
+    override fun onFirstViewAttach() {
+        getEvents(offsetDefault)
+    }
+
+    fun getEvents(offset: Int) {
+        repo.getEvents(offset)
             .doOnSubscribe {
                 viewState.showProgressBar()
             }
@@ -54,12 +34,14 @@ class MainPresenter : MvpPresenter<MainView>() {
             .subscribeBy(
                 onSuccess = {
                     if (it.isEmpty()) {
-                        viewState.detachOnScrollListeners()
-                    }
-                    if (!TempEvents.events.containsAll(it)) {
-                        EventsDBRepo.saveEvents(it)
-                        TempEvents.events.addAll(it)
-                        viewState.displayEvents(TempEvents.events)
+                        if (offset != offsetDefault) {
+                            viewState.detachOnScrollListeners()
+                        } else {
+                            getEvents(offset)
+                        }
+                    } else {
+                        repo.cacheEvents(it)
+                        viewState.displayEvents(it)
                         viewState.displaySuccess()
                     }
                 },
@@ -69,9 +51,9 @@ class MainPresenter : MvpPresenter<MainView>() {
             )
     }
 
-    fun initSharedPrefs(sharedPreferences: SharedPreferences) = Pagination.setSharedPrefs(sharedPreferences)
+    fun initSharedPrefs(sharedPreferences: SharedPreferences) = Pagination().setSharedPrefs(sharedPreferences)
 
-    fun setSharedPrefs(value: Int) = Pagination.setCurrentPagination(value)
+    fun setSharedPrefs(value: Int) = Pagination().setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
 }

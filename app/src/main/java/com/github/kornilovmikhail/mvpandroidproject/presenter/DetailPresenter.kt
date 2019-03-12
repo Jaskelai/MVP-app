@@ -2,7 +2,7 @@ package com.github.kornilovmikhail.mvpandroidproject.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.github.kornilovmikhail.mvpandroidproject.data.TempEvents
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.TempEvents
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailView
 
 @InjectViewState

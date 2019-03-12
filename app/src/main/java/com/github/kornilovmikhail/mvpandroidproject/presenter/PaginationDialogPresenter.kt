@@ -8,7 +8,7 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDia
 @InjectViewState
 class PaginationDialogPresenter : MvpPresenter<PaginationDialogView>() {
     fun setPagination(pagination: Int) {
-        Pagination.setCurrentPagination(pagination)
+        Pagination().setCurrentPagination(pagination)
     }
 
     fun dismiss() {
