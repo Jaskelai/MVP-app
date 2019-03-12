@@ -113,5 +113,4 @@ class MainPresenterTest {
         //Assert
         verify(mockViewState).navigateToMain(expectedPosition)
     }
-
 }
