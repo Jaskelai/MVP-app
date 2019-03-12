@@ -9,8 +9,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
-import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
 
 class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
