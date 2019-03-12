@@ -9,7 +9,7 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class MainPresenter(private val repo: EventsRepo) : MvpPresenter<MainView>() {
+class MainPresenter(private val repo: EventsRepo, private val pagination: Pagination) : MvpPresenter<MainView>() {
 
     companion object {
         private const val offsetDefault = 0
@@ -47,9 +47,9 @@ class MainPresenter(private val repo: EventsRepo) : MvpPresenter<MainView>() {
             )
     }
 
-    fun initSharedPrefs(sharedPreferences: SharedPreferences) = Pagination().setSharedPrefs(sharedPreferences)
+    fun initSharedPrefs(sharedPreferences: SharedPreferences) = pagination.setSharedPrefs(sharedPreferences)
 
-    fun setSharedPrefs(value: Int) = Pagination().setCurrentPagination(value)
+    fun setSharedPrefs(value: Int) = pagination.setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
 }

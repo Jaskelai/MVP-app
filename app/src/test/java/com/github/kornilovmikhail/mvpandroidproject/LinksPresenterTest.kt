@@ -19,9 +19,6 @@ class LinksPresenterTest {
     @Mock
     lateinit var mockViewState: `LinksView$$State`
 
-    @Mock
-    lateinit var mockTempEvents: TempEvents
-
     @InjectMocks
     @Spy
     lateinit var linksPresenter: LinksPresenter
@@ -39,7 +36,6 @@ class LinksPresenterTest {
         val event = Event(0, "", 0, 0, "", Links(0, "", "", ""))
         listEvents.add(event)
         TempEvents.events = listEvents
-        doReturn(listEvents).`when`(mockTempEvents).events
         //Act
         linksPresenter.getLinks(position)
         //Assert

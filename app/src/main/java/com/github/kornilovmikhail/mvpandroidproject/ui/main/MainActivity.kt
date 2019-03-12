@@ -18,6 +18,7 @@ import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
+import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
 
@@ -30,7 +31,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     lateinit var mainPresenter: MainPresenter
 
     @ProvidePresenter
-    fun initPresenter(): MainPresenter = MainPresenter(EventsRepo)
+    fun initPresenter(): MainPresenter = MainPresenter(EventsRepo, Pagination)
 
     companion object {
         const val EXTRA_POSITION: String = "position"

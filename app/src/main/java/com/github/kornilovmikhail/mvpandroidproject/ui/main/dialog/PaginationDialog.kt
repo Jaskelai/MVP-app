@@ -6,13 +6,20 @@ import android.support.v7.app.AlertDialog
 import android.widget.EditText
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
+import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
 
 class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
 
     @InjectPresenter
     lateinit var paginationPresenter: PaginationDialogPresenter
+
+    @ProvidePresenter
+    fun initPresenter() = PaginationDialogPresenter(Pagination)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val v = activity?.layoutInflater?.inflate(R.layout.pagination_dialog, null)

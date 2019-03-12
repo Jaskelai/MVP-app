@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 object EventsNetworkRepo{
      fun getEvents(offset: Int): Single<List<Event>> =
         SpaceXService.service()
-            .loadEvents(offset, Pagination().getCurrentPagination())
+            .loadEvents(offset, Pagination.getCurrentPagination())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

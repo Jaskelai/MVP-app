@@ -2,13 +2,11 @@ package com.github.kornilovmikhail.mvpandroidproject.data
 
 import android.content.SharedPreferences
 
-class Pagination {
+object Pagination {
 
-    companion object {
-        private const val DEFAULT_PAGINATION = 12
-        private const val NAME_PAGINATION = "current_pagination"
-        private var preference: SharedPreferences? = null
-    }
+    private const val DEFAULT_PAGINATION = 12
+    private const val NAME_PAGINATION = "current_pagination"
+    private var preference: SharedPreferences? = null
 
     fun setSharedPrefs(preferences: SharedPreferences) {
         preference = preferences

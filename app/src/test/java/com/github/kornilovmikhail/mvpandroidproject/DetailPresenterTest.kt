@@ -41,7 +41,6 @@ class DetailPresenterTest {
         val event = Event(0, "", 0, 0, "", Links(0, "", "", ""))
         listEvents.add(event)
         TempEvents.events = listEvents
-        Mockito.doReturn(listEvents).`when`(mockTempEvents).events
         //Act
         detailPresenter.getEvent(position)
         //Assert

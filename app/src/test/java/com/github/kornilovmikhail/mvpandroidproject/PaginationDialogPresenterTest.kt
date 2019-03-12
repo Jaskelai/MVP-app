@@ -16,10 +16,10 @@ import org.mockito.junit.MockitoJUnitRunner
 class PaginationDialogPresenterTest {
 
     @Mock
-    lateinit var mockPagination: Pagination
+    lateinit var mockViewState: `PaginationDialogView$$State`
 
     @Mock
-    lateinit var mockViewState: `PaginationDialogView$$State`
+    lateinit var mockPagination: Pagination
 
     @InjectMocks
     @Spy
@@ -31,7 +31,7 @@ class PaginationDialogPresenterTest {
     }
 
     @Test
-    fun testFunPagination() {
+    fun testSetPagination() {
         //Arrange
         val pagination = 2
         //Act
