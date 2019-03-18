@@ -1,6 +1,5 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.module
 
-import android.support.v7.widget.RecyclerView
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo

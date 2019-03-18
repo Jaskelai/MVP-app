@@ -15,8 +15,8 @@ class App : Application() {
     }
 
     companion object {
-        private lateinit var appComponent: AppComponent
+        private var appComponent: AppComponent? = null
 
-        fun getAppComponents(): AppComponent = appComponent
+        fun getAppComponents(): AppComponent? = appComponent
     }
 }

@@ -8,7 +8,6 @@ import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.scope.EventScope
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class DBModule {

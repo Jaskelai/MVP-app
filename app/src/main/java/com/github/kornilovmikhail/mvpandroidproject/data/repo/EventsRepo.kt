@@ -23,9 +23,7 @@ class EventsRepo(
 
     private fun getEventsFromNetwork(offset: Int): Single<List<Event>> = eventsNetworkRepo.getEvents(offset)
 
-    private fun getEventsFromDB(): Single<List<Event>> {
-        return eventsDBRepo.getEvents()
-    }
+    private fun getEventsFromDB(): Single<List<Event>> = eventsDBRepo.getEvents()
 
     fun cacheEvents(events: List<Event>) {
         if (!tempEvents.events.containsAll(events)) {
