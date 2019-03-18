@@ -3,6 +3,7 @@ package com.github.kornilovmikhail.mvpandroidproject
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.TempEvents
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Links
+import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.`LinksView$$State`
 import org.junit.Before
@@ -18,6 +19,9 @@ class LinksPresenterTest {
 
     @Mock
     lateinit var mockViewState: `LinksView$$State`
+
+    @Mock
+    lateinit var mockEventsRepo: EventsRepo
 
     @InjectMocks
     @Spy
@@ -39,6 +43,7 @@ class LinksPresenterTest {
         val event = Event(0, "", 0, 0, "", Links(0, "", "", ""))
         listEvents.add(event)
         TempEvents.events = listEvents
+        `when`(mockEventsRepo.getCachedEvents()).thenReturn(listEvents)
         //Act
         linksPresenter.getLinks(position)
         //Assert

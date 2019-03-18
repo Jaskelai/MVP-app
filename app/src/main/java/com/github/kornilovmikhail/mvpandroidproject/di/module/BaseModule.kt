@@ -26,5 +26,5 @@ class BaseModule {
 
     @Provides
     @EventScope
-    fun provideTempEvents(): TempEvents = TempEvents()
+    fun provideTempEvents(): TempEvents = TempEvents
 }
