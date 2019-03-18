@@ -13,37 +13,51 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerEventComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.module.BaseModule
+import com.github.kornilovmikhail.mvpandroidproject.di.module.DBModule
+import com.github.kornilovmikhail.mvpandroidproject.di.module.MainModule
+import com.github.kornilovmikhail.mvpandroidproject.di.module.NetModule
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    private var eventsAdapter: EventAdapter? = null
-    private val nameSharedprefs: String = "Pagination"
+    @Inject
+    lateinit var eventsAdapter: EventAdapter
 
+    @Inject
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
 
     @ProvidePresenter
-    fun initPresenter(): MainPresenter = MainPresenter(EventsRepo, Pagination)
+    fun getPresenter(): MainPresenter = mainPresenter
 
     companion object {
         const val EXTRA_POSITION: String = "position"
+        const val NAME_SHAREDPREFS: String = "Pagination"
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerEventComponent.builder()
+            .appComponent(App.getAppComponents())
+            .mainModule(MainModule())
+            .netModule(NetModule())
+            .dBModule(DBModule())
+            .baseModule(BaseModule())
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
+        mainPresenter.initSharedPrefs(getSharedPreferences(NAME_SHAREDPREFS, Context.MODE_PRIVATE))
         mainPresenter.getEvents(0)
-        mainPresenter.initSharedPrefs(getSharedPreferences(nameSharedprefs, Context.MODE_PRIVATE))
     }
 
     private fun setupViews() {
@@ -57,13 +71,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun displayEvents(listEvents: List<Event>) {
-        if (eventsAdapter == null) {
-            eventsAdapter = EventAdapter(listEvents) {
-                mainPresenter.eventClick(it)
-            }
-            rv_events.adapter = eventsAdapter
-        }
-        eventsAdapter?.submitList(listEvents)
+        rv_events.adapter = eventsAdapter
+        eventsAdapter.submitList(listEvents)
     }
 
     override fun displaySuccess() {

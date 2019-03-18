@@ -8,26 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
+import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
+import javax.inject.Inject
 
-class EventAdapter(
-    private val events: List<Event>,
-    private val eventLambda: (Int) -> Unit
+class EventAdapter @Inject constructor(
+    private val mainPresenter: MainPresenter
 ) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
-        return EventHolder(view)
+        return EventHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.event_list_item, parent, false)
+        )
     }
 
-    override fun getItemCount(): Int = events.size
+    override fun getItemCount(): Int = mainPresenter.getListItemsCount()
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
-        holder.bind(events[position].title)
+        mainPresenter.onBindListOnPosition(position, holder)
         holder.itemView.setOnClickListener {
-            eventLambda.invoke(position)
-        }
+            mainPresenter.eventClick(position) }
     }
 
     override fun submitList(list: List<Event>?) {
@@ -42,9 +44,9 @@ class EventAdapter(
     }
 
     class EventHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+        LayoutContainer, EventListView {
 
-        fun bind(eventName: String) {
+        override fun setText(eventName: String) {
             containerView.tv_list_item_name.text = eventName
         }
     }

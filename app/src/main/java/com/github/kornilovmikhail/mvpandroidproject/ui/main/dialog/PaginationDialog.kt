@@ -17,7 +17,7 @@ class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
     lateinit var paginationPresenter: PaginationDialogPresenter
 
     @ProvidePresenter
-    fun initPresenter() = PaginationDialogPresenter(Pagination)
+    fun initPresenter() = PaginationDialogPresenter(Pagination())
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val v = activity?.layoutInflater?.inflate(R.layout.pagination_dialog, null)

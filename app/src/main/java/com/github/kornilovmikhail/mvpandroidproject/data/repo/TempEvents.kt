@@ -2,6 +2,6 @@ package com.github.kornilovmikhail.mvpandroidproject.data.repo
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 
-object TempEvents {
+class TempEvents {
     var events: MutableList<Event> = ArrayList()
 }

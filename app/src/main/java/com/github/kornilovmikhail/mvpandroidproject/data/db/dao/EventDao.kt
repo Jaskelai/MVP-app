@@ -10,7 +10,7 @@ import io.reactivex.Single
 @Dao
 interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvents(cities: List<Event>)
+    fun insertEvents(events: List<Event>)
 
     @Query("SELECT * FROM eventData")
     fun getEvents(): Single<List<Event>>

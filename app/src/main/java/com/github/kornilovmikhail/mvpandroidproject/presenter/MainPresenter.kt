@@ -4,12 +4,15 @@ import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
+import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventListView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class MainPresenter(private val repo: EventsRepo, private val pagination: Pagination) : MvpPresenter<MainView>() {
+class MainPresenter (private val repo: EventsRepo, private val pagination: Pagination) :
+    MvpPresenter<MainView>() {
 
     companion object {
         private const val offsetDefault = 0
@@ -46,4 +49,11 @@ class MainPresenter(private val repo: EventsRepo, private val pagination: Pagina
     fun setSharedPrefs(value: Int) = pagination.setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
+
+    fun getListItemsCount() = repo.getCachedEvents().count()
+
+    fun onBindListOnPosition(position: Int, eventListView: EventListView) {
+        val event: Event = repo.getCachedEvents()[position]
+        eventListView.setText(event.title)
+    }
 }

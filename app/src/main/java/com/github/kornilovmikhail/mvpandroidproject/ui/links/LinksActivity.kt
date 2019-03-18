@@ -3,17 +3,32 @@ package com.github.kornilovmikhail.mvpandroidproject.ui.links
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.R
+import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerEventComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.module.*
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import kotlinx.android.synthetic.main.activity_links.*
+import javax.inject.Inject
 
 class LinksActivity : MvpAppCompatActivity(), LinksView {
 
+    @Inject
     @InjectPresenter
     lateinit var linksPresenter: LinksPresenter
 
+    @ProvidePresenter
+    fun getPresenter(): LinksPresenter = linksPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        DaggerEventComponent.builder()
+            .appComponent(App.getAppComponents())
+            .baseModule(BaseModule())
+            .linksModule(LinksModule())
+            .build()
+            .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_links)
         setupViews()
