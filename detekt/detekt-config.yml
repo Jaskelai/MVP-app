@@ -218,7 +218,7 @@ potential-bugs:
     active: true
   LateinitUsage:
     active: true
-    excludeAnnotatedProperties: "InjectPresenter, InjectExtra"
+    excludeAnnotatedProperties: "InjectPresenter, InjectExtra, Inject"
     ignoreOnClassesPattern: ""
   UnconditionalJumpStatementInLoop:
     active: true
