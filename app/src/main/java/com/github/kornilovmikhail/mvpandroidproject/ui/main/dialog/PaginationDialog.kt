@@ -28,9 +28,12 @@ class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
                 .setPositiveButton(
                     R.string.label_submit
                 ) { _, _ ->
-                    paginationPresenter.setPagination(
-                        v?.findViewById<EditText>(R.id.edt_pagination)?.text.toString().toInt()
-                    )
+                    val pagination = v?.findViewById<EditText>(R.id.edt_pagination)?.text.toString()
+                    if (pagination != "") {
+                        paginationPresenter.setPagination(
+                            pagination.toInt()
+                        )
+                    }
                     paginationPresenter.dismiss()
                 }
                 .setNegativeButton(
