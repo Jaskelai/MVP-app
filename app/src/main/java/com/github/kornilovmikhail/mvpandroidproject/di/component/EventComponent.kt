@@ -11,7 +11,7 @@ import dagger.Component
 @Component(
     dependencies = [AppComponent::class],
     modules = [BaseModule::class, MainModule::class, DetailModule::class,
-        LinksModule::class, NetModule::class, DBModule::class]
+        LinksModule::class, DataNetModule::class, DataDBModule::class]
 )
 interface EventComponent {
     fun inject(mainActivity: MainActivity)

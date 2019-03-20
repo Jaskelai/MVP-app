@@ -21,9 +21,9 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerEventComponent
 import com.github.kornilovmikhail.mvpandroidproject.di.module.BaseModule
-import com.github.kornilovmikhail.mvpandroidproject.di.module.DBModule
+import com.github.kornilovmikhail.mvpandroidproject.di.module.DataDBModule
 import com.github.kornilovmikhail.mvpandroidproject.di.module.MainModule
-import com.github.kornilovmikhail.mvpandroidproject.di.module.NetModule
+import com.github.kornilovmikhail.mvpandroidproject.di.module.DataNetModule
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
 import javax.inject.Inject
 
@@ -48,8 +48,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         DaggerEventComponent.builder()
             .appComponent(App.getAppComponents())
             .mainModule(MainModule())
-            .netModule(NetModule())
-            .dBModule(DBModule())
+            .dataNetModule(DataNetModule())
+            .dataDBModule(DataDBModule())
             .baseModule(BaseModule())
             .build()
             .inject(this)

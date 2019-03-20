@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class DBModule {
+class DataDBModule {
     @Provides
     @EventScope
     fun provideEventDatabase(context: Context): EventDatabase = Room.databaseBuilder(
