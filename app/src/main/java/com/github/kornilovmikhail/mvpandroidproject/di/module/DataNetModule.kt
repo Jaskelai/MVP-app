@@ -1,6 +1,5 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.module
 
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXAPI
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.scope.EventScope
@@ -41,6 +40,6 @@ class DataNetModule {
 
     @Provides
     @EventScope
-    fun provideEventsNetworkRepo(spaceXAPI: SpaceXAPI, pagination: Pagination): EventsNetworkRepo =
-        EventsNetworkRepo(spaceXAPI, pagination)
+    fun provideEventsNetworkRepo(spaceXAPI: SpaceXAPI): EventsNetworkRepo =
+        EventsNetworkRepo(spaceXAPI)
 }

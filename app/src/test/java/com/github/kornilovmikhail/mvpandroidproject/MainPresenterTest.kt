@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
 import android.content.SharedPreferences
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
@@ -26,7 +26,7 @@ class MainPresenterTest {
     lateinit var mockEventsRepo: EventsRepo
 
     @Mock
-    lateinit var mockPagination: Pagination
+    lateinit var mockPaginationPreferences: PaginationPreferences
 
     @Mock
     lateinit var mockMainPresenter: MainPresenter
@@ -85,13 +85,13 @@ class MainPresenterTest {
 
 
     @Test
-    fun testInitSharedPrefs() {
+    fun testInitSharedPreferences() {
         //Arrange
         val mockSharedPreferences = mock(SharedPreferences::class.java)
         //Act
-        mainPresenter.initSharedPrefs(mockSharedPreferences)
+        mainPresenter.initSharedPreferences(mockSharedPreferences)
         //Assert
-        verify(mockPagination).setSharedPrefs(mockSharedPreferences)
+        verify(mockPaginationPreferences).setSharedPrefs(mockSharedPreferences)
     }
 
     @Test
@@ -101,7 +101,7 @@ class MainPresenterTest {
         //Act
         mainPresenter.setSharedPrefs(expectedNumber)
         //Assert
-        verify(mockPagination).setCurrentPagination(expectedNumber)
+        verify(mockPaginationPreferences).setCurrentPagination(expectedNumber)
     }
 
     @Test

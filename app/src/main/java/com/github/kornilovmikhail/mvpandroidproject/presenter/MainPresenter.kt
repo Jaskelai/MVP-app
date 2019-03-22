@@ -3,15 +3,12 @@ package com.github.kornilovmikhail.mvpandroidproject.presenter
 import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
-import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventListView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class MainPresenter (private val repo: EventsRepo, private val pagination: Pagination) :
+class MainPresenter(private val eventsRepo: EventsRepo) :
     MvpPresenter<MainView>() {
 
     companion object {
@@ -19,7 +16,7 @@ class MainPresenter (private val repo: EventsRepo, private val pagination: Pagin
     }
 
     fun getEvents(offset: Int) {
-        repo.getEvents(offset)
+        eventsRepo.getEvents(offset)
             .doOnSubscribe {
                 viewState.showProgressBar()
             }
@@ -33,7 +30,7 @@ class MainPresenter (private val repo: EventsRepo, private val pagination: Pagin
                             viewState.detachOnScrollListeners()
                         }
                     } else {
-                        repo.cacheEvents(it)
+                        eventsRepo.cacheEvents(it)
                         viewState.displayEvents(it)
                         viewState.displaySuccess()
                     }
@@ -44,9 +41,9 @@ class MainPresenter (private val repo: EventsRepo, private val pagination: Pagin
             )
     }
 
-    fun initSharedPrefs(sharedPreferences: SharedPreferences) = pagination.setSharedPrefs(sharedPreferences)
+    fun initSharedPreferences(sharedPreferences: SharedPreferences) = eventsRepo.setSharedPreferences(sharedPreferences)
 
-    fun setSharedPrefs(value: Int) = pagination.setCurrentPagination(value)
+    fun setSharedPrefs(value: Int) = eventsRepo.setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
 }

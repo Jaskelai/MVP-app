@@ -2,7 +2,7 @@ package com.github.kornilovmikhail.mvpandroidproject.data
 
 import android.content.SharedPreferences
 
-class Pagination {
+class PaginationPreferences {
     private var preference: SharedPreferences? = null
 
     companion object {

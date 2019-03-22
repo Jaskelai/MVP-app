@@ -1,7 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
-import com.github.kornilovmikhail.mvpandroidproject.data.entity.Links
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.`LinksView$$State`

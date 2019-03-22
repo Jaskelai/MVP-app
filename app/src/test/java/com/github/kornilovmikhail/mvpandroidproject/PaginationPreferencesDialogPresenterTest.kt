@@ -1,6 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.`PaginationDialogView$$State`
 import org.junit.Before
@@ -13,13 +13,13 @@ import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class PaginationDialogPresenterTest {
+class PaginationPreferencesDialogPresenterTest {
 
     @Mock
     lateinit var mockViewState: `PaginationDialogView$$State`
 
     @Mock
-    lateinit var mockPagination: Pagination
+    lateinit var mockPaginationPreferences: PaginationPreferences
 
     @InjectMocks
     @Spy
@@ -37,7 +37,7 @@ class PaginationDialogPresenterTest {
         //Act
         paginationDialogPresenter.setPagination(expectedPagination)
         //Assert
-        Mockito.verify(mockPagination).setCurrentPagination(expectedPagination)
+        Mockito.verify(mockPaginationPreferences).setCurrentPagination(expectedPagination)
     }
 
     @Test

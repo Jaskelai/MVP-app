@@ -38,7 +38,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     companion object {
         const val EXTRA_POSITION: String = "position"
-        const val NAME_SHAREDPREFS: String = "Pagination"
+        const val NAME_SHAREDPREFS: String = "PaginationPreferences"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupViews()
-        mainPresenter.initSharedPrefs(getSharedPreferences(NAME_SHAREDPREFS, Context.MODE_PRIVATE))
+        mainPresenter.initSharedPreferences(getSharedPreferences(NAME_SHAREDPREFS, Context.MODE_PRIVATE))
         mainPresenter.getEvents(0)
     }
 

@@ -8,7 +8,7 @@ import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
 
 class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
@@ -17,7 +17,7 @@ class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
     lateinit var paginationPresenter: PaginationDialogPresenter
 
     @ProvidePresenter
-    fun initPresenter() = PaginationDialogPresenter(Pagination())
+    fun initPresenter() = PaginationDialogPresenter(PaginationPreferences())
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val v = activity?.layoutInflater?.inflate(R.layout.pagination_dialog, null)

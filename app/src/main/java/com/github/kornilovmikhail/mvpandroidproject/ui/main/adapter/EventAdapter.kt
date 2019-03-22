@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
-import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
-import javax.inject.Inject
 
 class EventAdapter(
     private val events: List<Event>,

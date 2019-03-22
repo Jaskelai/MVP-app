@@ -1,6 +1,5 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.module
 
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.scope.EventScope
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
@@ -11,6 +10,6 @@ import dagger.Provides
 class MainModule {
     @Provides
     @EventScope
-    fun providePresenter(eventsRepo: EventsRepo, pagination: Pagination): MainPresenter =
-        MainPresenter(eventsRepo, pagination)
+    fun providePresenter(eventsRepo: EventsRepo): MainPresenter =
+        MainPresenter(eventsRepo)
 }

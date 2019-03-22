@@ -1,6 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.module
 
-import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
+import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
@@ -15,9 +15,9 @@ class BaseModule {
     fun provideEventsRepo(
         eventsDBRepo: EventsDBRepo,
         eventsNetworkRepo: EventsNetworkRepo
-    ): EventsRepo = EventsRepo(eventsDBRepo, eventsNetworkRepo)
+    ): EventsRepo = EventsRepo(eventsDBRepo, eventsNetworkRepo, providePagination())
 
     @Provides
     @EventScope
-    fun providePagination(): Pagination = Pagination()
+    fun providePagination(): PaginationPreferences = PaginationPreferences()
 }
