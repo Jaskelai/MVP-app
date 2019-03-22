@@ -25,7 +25,7 @@ class EventsRepo(
         return getEventsFromDB()
     }
 
-    private fun getCurrentPagination():Int? {
+    private fun getCurrentPagination(): Int? {
         return paginationPreferences.getCurrentPagination()
     }
 
@@ -37,11 +37,10 @@ class EventsRepo(
         paginationPreferences.setSharedPrefs(sharedPreferences)
     }
 
-    private fun getEventsFromNetwork(offset: Int): Single<List<Event>> = eventsNetworkRepo.getEvents(offset, getCurrentPagination())
+    private fun getEventsFromNetwork(offset: Int): Single<List<Event>> =
+        eventsNetworkRepo.getEvents(offset, getCurrentPagination())
 
     private fun getEventsFromDB(): Single<List<Event>> = eventsDBRepo.getEvents()
 
-    fun cacheEvents(events: List<Event>) {
-        eventsDBRepo.saveEvents(events)
-    }
+    fun cacheEvents(events: List<Event>) = eventsDBRepo.saveEvents(events)
 }

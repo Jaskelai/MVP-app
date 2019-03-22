@@ -25,12 +25,6 @@ class MainPresenterTest {
     @Mock
     lateinit var mockEventsRepo: EventsRepo
 
-    @Mock
-    lateinit var mockPaginationPreferences: PaginationPreferences
-
-    @Mock
-    lateinit var mockMainPresenter: MainPresenter
-
     @InjectMocks
     @Spy
     lateinit var mainPresenter: MainPresenter
@@ -91,7 +85,7 @@ class MainPresenterTest {
         //Act
         mainPresenter.initSharedPreferences(mockSharedPreferences)
         //Assert
-        verify(mockPaginationPreferences).setSharedPrefs(mockSharedPreferences)
+        verify(mockEventsRepo).setSharedPreferences(mockSharedPreferences)
     }
 
     @Test
@@ -101,7 +95,7 @@ class MainPresenterTest {
         //Act
         mainPresenter.setSharedPrefs(expectedNumber)
         //Assert
-        verify(mockPaginationPreferences).setCurrentPagination(expectedNumber)
+        verify(mockEventsRepo).setCurrentPagination(expectedNumber)
     }
 
     @Test

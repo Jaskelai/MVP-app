@@ -6,7 +6,8 @@ import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialogView
 
 @InjectViewState
-class PaginationDialogPresenter(private val paginationPreferences: PaginationPreferences) : MvpPresenter<PaginationDialogView>() {
+class PaginationDialogPresenter(private val paginationPreferences: PaginationPreferences) :
+    MvpPresenter<PaginationDialogView>() {
 
     fun setPagination(paginationValue: Int) {
         paginationPreferences.setCurrentPagination(paginationValue)
