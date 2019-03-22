@@ -13,23 +13,23 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.event_list_item.view.*
 import javax.inject.Inject
 
-class EventAdapter @Inject constructor(
-    private val mainPresenter: MainPresenter
+class EventAdapter(
+    private val events: List<Event>,
+    private val eventLambda: (Int) -> Unit
 ) : ListAdapter<Event, EventAdapter.EventHolder>(EventDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): EventHolder {
-        return EventHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.event_list_item, parent, false)
-        )
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
+        return EventHolder(view)
     }
 
-    override fun getItemCount(): Int = mainPresenter.getListItemsCount()
+    override fun getItemCount(): Int = events.size
 
     override fun onBindViewHolder(holder: EventHolder, position: Int) {
-        mainPresenter.onBindListOnPosition(position, holder)
+        holder.bind(events[position].title)
         holder.itemView.setOnClickListener {
-            mainPresenter.eventClick(position) }
+            eventLambda.invoke(position)
+        }
     }
 
     override fun submitList(list: List<Event>?) {
@@ -44,9 +44,9 @@ class EventAdapter @Inject constructor(
     }
 
     class EventHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer, EventListView {
+        LayoutContainer {
 
-        override fun setText(eventName: String) {
+        fun bind(eventName: String) {
             containerView.tv_list_item_name.text = eventName
         }
     }

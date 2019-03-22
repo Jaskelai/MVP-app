@@ -28,10 +28,7 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDia
 import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
-
-    @Inject
-    lateinit var eventsAdapter: EventAdapter
-
+    private var eventsAdapter: EventAdapter? = null
     @Inject
     @InjectPresenter
     lateinit var mainPresenter: MainPresenter
@@ -71,8 +68,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun displayEvents(listEvents: List<Event>) {
-        rv_events.adapter = eventsAdapter
-        eventsAdapter.submitList(listEvents)
+        if (eventsAdapter == null) {
+            eventsAdapter = EventAdapter(listEvents) {
+                mainPresenter.eventClick(it)
+            }
+            rv_events.adapter = eventsAdapter
+        }
+        eventsAdapter?.submitList(listEvents)
     }
 
     override fun displaySuccess() {
@@ -84,11 +86,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showProgressBar() {
-        progressBar.visibility = ProgressBar.VISIBLE
+        main_progressBar.visibility = ProgressBar.VISIBLE
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = ProgressBar.INVISIBLE
+        main_progressBar.visibility = ProgressBar.INVISIBLE
     }
 
     override fun detachOnScrollListeners() = rv_events.clearOnScrollListeners()

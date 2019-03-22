@@ -4,7 +4,6 @@ import com.github.kornilovmikhail.mvpandroidproject.data.Pagination
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.TempEvents
 import com.github.kornilovmikhail.mvpandroidproject.di.scope.EventScope
 import dagger.Module
 import dagger.Provides
@@ -15,15 +14,10 @@ class BaseModule {
     @EventScope
     fun provideEventsRepo(
         eventsDBRepo: EventsDBRepo,
-        eventsNetworkRepo: EventsNetworkRepo,
-        tempEvents: TempEvents
-    ): EventsRepo = EventsRepo(eventsDBRepo, eventsNetworkRepo, tempEvents)
+        eventsNetworkRepo: EventsNetworkRepo
+    ): EventsRepo = EventsRepo(eventsDBRepo, eventsNetworkRepo)
 
     @Provides
     @EventScope
     fun providePagination(): Pagination = Pagination()
-
-    @Provides
-    @EventScope
-    fun provideTempEvents(): TempEvents = TempEvents
 }

@@ -49,11 +49,4 @@ class MainPresenter (private val repo: EventsRepo, private val pagination: Pagin
     fun setSharedPrefs(value: Int) = pagination.setCurrentPagination(value)
 
     fun eventClick(position: Int) = viewState.navigateToMain(position)
-
-    fun getListItemsCount() = repo.getCachedEvents().count()
-
-    fun onBindListOnPosition(position: Int, eventListView: EventListView) {
-        val event: Event = repo.getCachedEvents()[position]
-        eventListView.setText(event.title)
-    }
 }

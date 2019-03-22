@@ -5,8 +5,7 @@ import io.reactivex.Single
 
 class EventsRepo(
     private val eventsDBRepo: EventsDBRepo,
-    private val eventsNetworkRepo: EventsNetworkRepo,
-    private val tempEvents: TempEvents
+    private val eventsNetworkRepo: EventsNetworkRepo
 ) {
     private var isFirst = true
 
@@ -26,11 +25,6 @@ class EventsRepo(
     private fun getEventsFromDB(): Single<List<Event>> = eventsDBRepo.getEvents()
 
     fun cacheEvents(events: List<Event>) {
-        if (!tempEvents.events.containsAll(events)) {
-            eventsDBRepo.saveEvents(events)
-            tempEvents.events.addAll(events)
-        }
+        eventsDBRepo.saveEvents(events)
     }
-
-    fun getCachedEvents(): List<Event> = tempEvents.events
 }

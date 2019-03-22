@@ -57,7 +57,7 @@ class MainPresenterTest {
     fun testGetEventsNotEmpty() {
         //Arrange
         val offset = 5
-        val mockEvent = Mockito.mock(Event::class.java)
+        val mockEvent = mock(Event::class.java)
         val events = arrayListOf(mockEvent)
         doReturn(Single.just(events)).`when`(mockEventsRepo).getEvents(offset)
         //Act
