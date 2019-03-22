@@ -25,9 +25,7 @@ class EventsRepo(
         return getEventsFromDB()
     }
 
-    private fun getCurrentPagination(): Int? {
-        return paginationPreferences.getCurrentPagination()
-    }
+    private fun getCurrentPagination(): Int? = paginationPreferences.getCurrentPagination()
 
     fun setCurrentPagination(pagination: Int) {
         paginationPreferences.setCurrentPagination(pagination)
