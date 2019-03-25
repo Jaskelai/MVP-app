@@ -40,5 +40,7 @@ class EventsRepo(
 
     private fun getEventsFromDB(): Single<List<Event>> = eventsDBRepo.getEvents()
 
-    fun cacheEvents(events: List<Event>) = eventsDBRepo.saveEvents(events)
+    fun cacheEvents(events: List<Event>) {
+        eventsDBRepo.saveEvents(events).subscribe()
+    }
 }
