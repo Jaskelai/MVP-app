@@ -37,6 +37,7 @@ class LinksActivity : MvpAppCompatActivity(), LinksView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_links)
         position = intent.getIntExtra(DetailsActivity.EXTRA_POSITION, 0)
+        linksPresenter.getLinks(position)
     }
 
     override fun displayEvent(event: Event) {

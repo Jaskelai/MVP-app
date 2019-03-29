@@ -6,7 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
-interface MainView : MvpView {
+interface ListView : MvpView {
     fun displayEvents(listEvents: List<Event>)
     fun displaySuccess()
     fun displayError()

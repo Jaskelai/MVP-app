@@ -6,7 +6,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterMod
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.EventScope
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.MainActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.ListActivity
 import dagger.Component
 
 @EventScope
@@ -15,7 +15,7 @@ import dagger.Component
     modules = [EventModule::class, PresenterModule::class]
 )
 interface EventComponent {
-    fun inject(mainActivity: MainActivity)
+    fun inject(mainActivity: ListActivity)
 
     fun inject(detailsActivity: DetailsActivity)
 

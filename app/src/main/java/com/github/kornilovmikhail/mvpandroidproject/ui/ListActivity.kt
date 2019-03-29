@@ -22,12 +22,12 @@ import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEventComponent
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
-import com.github.kornilovmikhail.mvpandroidproject.ui.list.MainView
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListView
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.OnScrollListener
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
 import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+class ListActivity : MvpAppCompatActivity(), ListView {
     private var eventsAdapter: EventAdapter? = null
     @Inject
     @InjectPresenter
@@ -94,7 +94,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun detachOnScrollListeners() = rv_events.clearOnScrollListeners()
 
     override fun navigateToMain(position: Int) {
-        val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+        val intent = Intent(this@ListActivity, DetailsActivity::class.java)
         intent.putExtra(EXTRA_POSITION, position)
         startActivity(intent)
     }

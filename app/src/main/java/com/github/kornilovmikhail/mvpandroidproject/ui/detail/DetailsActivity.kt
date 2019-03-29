@@ -18,7 +18,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.MainActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.ListActivity
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
@@ -47,7 +47,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         setupViews()
-        position = intent.getIntExtra(MainActivity.EXTRA_POSITION, 0)
+        position = intent.getIntExtra(ListActivity.EXTRA_POSITION, 0)
         detailPresenter.getEvent(position)
     }
 
