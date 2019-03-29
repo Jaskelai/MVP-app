@@ -21,7 +21,6 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEventComponent
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
-import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataNetModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.MainView
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.OnScrollListener
