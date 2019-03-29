@@ -8,9 +8,5 @@ import com.github.kornilovmikhail.mvpandroidproject.data.entity.Links
 
 @Database(entities = [Event::class, Links::class], version = 1)
 abstract class EventDatabase : RoomDatabase() {
-    companion object {
-        const val DATABASE_NAME = "spaceX_app.db"
-    }
-
     abstract fun eventDao(): EventDao
 }

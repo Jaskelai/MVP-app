@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter
+package com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter
 
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil

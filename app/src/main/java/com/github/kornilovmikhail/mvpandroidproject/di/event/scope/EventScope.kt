@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.di.scope
+package com.github.kornilovmikhail.mvpandroidproject.di.event.scope
 
 import javax.inject.Scope
 

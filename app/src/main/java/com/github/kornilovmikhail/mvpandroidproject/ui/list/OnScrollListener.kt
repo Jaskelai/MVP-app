@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui.main
+package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView

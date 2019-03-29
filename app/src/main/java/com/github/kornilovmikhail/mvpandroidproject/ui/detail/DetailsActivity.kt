@@ -13,11 +13,12 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
-import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerEventComponent
-import com.github.kornilovmikhail.mvpandroidproject.di.module.*
+import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEventComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
+import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
@@ -39,8 +40,8 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
             .appComponent(App.getAppComponents())
-            .detailModule(DetailModule())
-            .baseModule(BaseModule())
+            .eventModule(EventModule())
+            .presenterModule(PresenterModule())
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)

@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog
+package com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog
 
 import android.app.Dialog
 import android.os.Bundle

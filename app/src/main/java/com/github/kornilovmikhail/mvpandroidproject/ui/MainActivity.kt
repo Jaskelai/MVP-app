@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.ui.main
+package com.github.kornilovmikhail.mvpandroidproject.ui
 
 import android.content.Context
 import android.content.Intent
@@ -17,14 +17,15 @@ import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.adapter.EventAdapter
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.R
-import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerEventComponent
-import com.github.kornilovmikhail.mvpandroidproject.di.module.BaseModule
-import com.github.kornilovmikhail.mvpandroidproject.di.module.DataDBModule
-import com.github.kornilovmikhail.mvpandroidproject.di.module.MainModule
-import com.github.kornilovmikhail.mvpandroidproject.di.module.DataNetModule
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.PaginationDialog
+import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEventComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
+import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataNetModule
+import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.MainView
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.OnScrollListener
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
 import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
@@ -44,10 +45,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
             .appComponent(App.getAppComponents())
-            .mainModule(MainModule())
-            .dataNetModule(DataNetModule())
-            .dataDBModule(DataDBModule())
-            .baseModule(BaseModule())
+            .eventModule(EventModule())
+            .presenterModule(PresenterModule())
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)

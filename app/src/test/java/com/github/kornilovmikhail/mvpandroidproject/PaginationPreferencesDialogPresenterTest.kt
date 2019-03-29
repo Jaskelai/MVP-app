@@ -2,7 +2,7 @@ package com.github.kornilovmikhail.mvpandroidproject
 
 import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.presenter.PaginationDialogPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.dialog.`PaginationDialogView$$State`
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.`PaginationDialogView$$State`
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

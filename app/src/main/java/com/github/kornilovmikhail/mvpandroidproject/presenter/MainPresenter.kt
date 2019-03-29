@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.MainView
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.MainView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState

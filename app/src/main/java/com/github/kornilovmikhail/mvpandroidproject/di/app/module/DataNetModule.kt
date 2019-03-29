@@ -1,8 +1,7 @@
-package com.github.kornilovmikhail.mvpandroidproject.di.module
+package com.github.kornilovmikhail.mvpandroidproject.di.app.module
 
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXAPI
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
-import com.github.kornilovmikhail.mvpandroidproject.di.scope.EventScope
+import com.github.kornilovmikhail.mvpandroidproject.di.app.scope.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -16,7 +15,7 @@ class DataNetModule {
     }
 
     @Provides
-    @EventScope
+    @ApplicationScope
     fun provideRetrofit(
         gsonConverterFactory: GsonConverterFactory,
         rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
@@ -27,19 +26,14 @@ class DataNetModule {
         .build()
 
     @Provides
-    @EventScope
+    @ApplicationScope
     fun provideSpaceXAPI(retrofit: Retrofit): SpaceXAPI = retrofit.create(SpaceXAPI::class.java)
 
     @Provides
-    @EventScope
+    @ApplicationScope
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
-    @EventScope
+    @ApplicationScope
     fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
-
-    @Provides
-    @EventScope
-    fun provideEventsNetworkRepo(spaceXAPI: SpaceXAPI): EventsNetworkRepo =
-        EventsNetworkRepo(spaceXAPI)
 }

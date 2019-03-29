@@ -1,9 +1,11 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
 import android.app.Application
-import com.github.kornilovmikhail.mvpandroidproject.di.component.AppComponent
-import com.github.kornilovmikhail.mvpandroidproject.di.component.DaggerAppComponent
-import com.github.kornilovmikhail.mvpandroidproject.di.module.ContextModule
+import com.github.kornilovmikhail.mvpandroidproject.di.app.component.AppComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.app.component.DaggerAppComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.app.module.ContextModule
+import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataDBModule
+import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataNetModule
 
 class App : Application() {
 
@@ -11,6 +13,8 @@ class App : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
+            .dataDBModule(DataDBModule())
+            .dataNetModule(DataNetModule())
             .build()
     }
 

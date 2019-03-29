@@ -1,11 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
 import android.content.SharedPreferences
-import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.main.`MainView$$State`
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.`MainView$$State`
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
