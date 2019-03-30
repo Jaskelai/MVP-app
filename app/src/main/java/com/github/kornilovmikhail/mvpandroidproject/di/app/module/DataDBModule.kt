@@ -2,8 +2,8 @@ package com.github.kornilovmikhail.mvpandroidproject.di.app.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.github.kornilovmikhail.mvpandroidproject.data.db.EventDatabase
-import com.github.kornilovmikhail.mvpandroidproject.data.db.dao.EventDao
+import com.github.kornilovmikhail.mvpandroidproject.data.local.EventDatabase
+import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.EventDao
 import com.github.kornilovmikhail.mvpandroidproject.di.app.scope.ApplicationScope
 import dagger.Module
 import dagger.Provides

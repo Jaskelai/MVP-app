@@ -1,10 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.event.module
 
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.EventScope
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
-import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
+import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -22,6 +22,6 @@ class PresenterModule {
 
     @Provides
     @EventScope
-    fun provideMainPresenter(eventsRepo: EventsRepo): MainPresenter =
-        MainPresenter(eventsRepo)
+    fun provideMainPresenter(eventsRepo: EventsRepo): ListPresenter =
+        ListPresenter(eventsRepo)
 }

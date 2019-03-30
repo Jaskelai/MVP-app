@@ -1,14 +1,13 @@
-package com.github.kornilovmikhail.mvpandroidproject.data.repo
+package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
 import android.content.SharedPreferences
-import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import io.reactivex.Single
 
 class EventsRepo(
     private val eventsDBRepo: EventsDBRepo,
     private val eventsNetworkRepo: EventsNetworkRepo,
-    private val paginationPreferences: PaginationPreferences
+    private val paginationPreferencesRepo: PaginationPreferencesRepo
 ) {
     companion object {
         private var isFirst = true
@@ -25,14 +24,14 @@ class EventsRepo(
         return getEventsFromDB()
     }
 
-    private fun getCurrentPagination(): Int? = paginationPreferences.getCurrentPagination()
+    private fun getCurrentPagination(): Int? = paginationPreferencesRepo.getCurrentPagination()
 
     fun setCurrentPagination(pagination: Int) {
-        paginationPreferences.setCurrentPagination(pagination)
+        paginationPreferencesRepo.setCurrentPagination(pagination)
     }
 
     fun setSharedPreferences(sharedPreferences: SharedPreferences) {
-        paginationPreferences.setSharedPrefs(sharedPreferences)
+        paginationPreferencesRepo.setSharedPrefs(sharedPreferences)
     }
 
     private fun getEventsFromNetwork(offset: Int): Single<List<Event>> =

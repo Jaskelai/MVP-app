@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.`DetailView$$State`
 import io.reactivex.Single

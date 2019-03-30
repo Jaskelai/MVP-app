@@ -1,13 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.detail
 
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.App
@@ -17,12 +14,12 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEve
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.ListActivity
-import kotlinx.android.synthetic.main.activity_details.*
+import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksFragment
+import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject
 
-class DetailsActivity : MvpAppCompatActivity(), DetailView {
+class DetailsFragment : MvpAppCompatFragment(), DetailView {
+    private var position: Int = 0
 
     @Inject
     @InjectPresenter
@@ -31,11 +28,6 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     @ProvidePresenter
     fun getPresenter(): DetailPresenter = detailPresenter
 
-    private var position: Int = 0
-
-    companion object {
-        const val EXTRA_POSITION: String = "position"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
@@ -45,20 +37,18 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
-        setupViews()
-        position = intent.getIntExtra(ListActivity.EXTRA_POSITION, 0)
+        setHasOptionsMenu(true)
+        position = arguments?.getInt("position") as Int
         detailPresenter.getEvent(position)
     }
 
-    private fun setupViews() {
-        setSupportActionBar(detail_toolbar as Toolbar?)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_details, container, false)
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_toolbar_details, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,9 +59,14 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     }
 
     private fun navigateToLinks(position: Int) {
-        val intent = Intent(this@DetailsActivity, LinksActivity::class.java)
-        intent.putExtra(EXTRA_POSITION, position)
-        startActivity(intent)
+        val args = Bundle()
+        args.putInt("position", position)
+        val linksFragment = LinksFragment()
+        linksFragment.arguments = args
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.main_container, linksFragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 
     override fun displayEvent(event: Event) {
@@ -81,7 +76,7 @@ class DetailsActivity : MvpAppCompatActivity(), DetailView {
     }
 
     override fun displayError() {
-        Toast.makeText(this, getString(R.string.server_events_error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.server_events_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgressBar() {

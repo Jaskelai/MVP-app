@@ -2,7 +2,7 @@ package com.github.kornilovmikhail.mvpandroidproject.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailView
 import io.reactivex.rxkotlin.subscribeBy
 

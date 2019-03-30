@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.data.db.dao
+package com.github.kornilovmikhail.mvpandroidproject.data.local.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert

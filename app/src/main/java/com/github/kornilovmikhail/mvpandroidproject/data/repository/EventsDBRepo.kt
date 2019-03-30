@@ -1,6 +1,6 @@
-package com.github.kornilovmikhail.mvpandroidproject.data.repo
+package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
-import com.github.kornilovmikhail.mvpandroidproject.data.db.dao.EventDao
+import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.EventDao
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import io.reactivex.Completable
 import io.reactivex.Single

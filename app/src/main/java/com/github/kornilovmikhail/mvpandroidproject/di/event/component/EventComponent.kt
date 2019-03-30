@@ -4,9 +4,10 @@ import com.github.kornilovmikhail.mvpandroidproject.di.app.component.AppComponen
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.EventScope
-import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksActivity
-import com.github.kornilovmikhail.mvpandroidproject.ui.ListActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.MainActivity
+import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
+import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksFragment
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListFragment
 import dagger.Component
 
 @EventScope
@@ -15,9 +16,11 @@ import dagger.Component
     modules = [EventModule::class, PresenterModule::class]
 )
 interface EventComponent {
-    fun inject(mainActivity: ListActivity)
+    fun inject(mainActivity: MainActivity)
 
-    fun inject(detailsActivity: DetailsActivity)
+    fun inject(listFragment: ListFragment)
 
-    fun inject(linksActivity: LinksActivity)
+    fun inject(detailsFragment: DetailsFragment)
+
+    fun inject(linksFragment: LinksFragment)
 }

@@ -1,8 +1,8 @@
-package com.github.kornilovmikhail.mvpandroidproject.data
+package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
 import android.content.SharedPreferences
 
-class PaginationPreferences {
+class PaginationPreferencesRepo {
     private var preference: SharedPreferences? = null
 
     companion object {
@@ -12,12 +12,18 @@ class PaginationPreferences {
 
     fun setSharedPrefs(preferences: SharedPreferences) {
         preference = preferences
-        preferences.edit().putInt(NAME_PAGINATION, DEFAULT_PAGINATION).apply()
+        preferences.edit().putInt(
+            NAME_PAGINATION,
+            DEFAULT_PAGINATION
+        ).apply()
     }
 
     fun setCurrentPagination(pagination: Int) {
         preference?.edit()?.putInt(NAME_PAGINATION, pagination)?.apply()
     }
 
-    fun getCurrentPagination(): Int? = preference?.getInt(NAME_PAGINATION, DEFAULT_PAGINATION)
+    fun getCurrentPagination(): Int? = preference?.getInt(
+        NAME_PAGINATION,
+        DEFAULT_PAGINATION
+    )
 }

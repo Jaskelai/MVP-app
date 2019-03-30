@@ -2,9 +2,9 @@ package com.github.kornilovmikhail.mvpandroidproject
 
 import android.content.SharedPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
-import com.github.kornilovmikhail.mvpandroidproject.presenter.MainPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.list.`MainView$$State`
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.`ListView$$State`
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -16,21 +16,21 @@ import org.mockito.junit.MockitoJUnitRunner
 
 
 @RunWith(MockitoJUnitRunner::class)
-class MainPresenterTest {
+class ListPresenterTest {
 
     @Mock
-    lateinit var mockViewState: `MainView$$State`
+    lateinit var mockViewState: `ListView$$State`
 
     @Mock
     lateinit var mockEventsRepo: EventsRepo
 
     @InjectMocks
     @Spy
-    lateinit var mainPresenter: MainPresenter
+    lateinit var listPresenter: ListPresenter
 
     @Before
     fun setUp() {
-        mainPresenter.setViewState(mockViewState)
+        listPresenter.setViewState(mockViewState)
     }
 
     @Test
@@ -39,7 +39,7 @@ class MainPresenterTest {
         val offset = 5
         doReturn(Single.just(ArrayList<Event>())).`when`(mockEventsRepo).getEvents(offset)
         //Act
-        mainPresenter.getEvents(offset)
+        listPresenter.getEvents(offset)
         //Assert
         verify(mockViewState).showProgressBar()
         verify(mockViewState).detachOnScrollListeners()
@@ -54,7 +54,7 @@ class MainPresenterTest {
         val events = arrayListOf(mockEvent)
         doReturn(Single.just(events)).`when`(mockEventsRepo).getEvents(offset)
         //Act
-        mainPresenter.getEvents(offset)
+        listPresenter.getEvents(offset)
         //Assert
         verify(mockViewState).showProgressBar()
         verify(mockEventsRepo).cacheEvents(events)
@@ -69,7 +69,7 @@ class MainPresenterTest {
         val offset = 5
         doReturn(Single.error<List<Event>>(Throwable())).`when`(mockEventsRepo).getEvents(offset)
         //Act
-        mainPresenter.getEvents(offset)
+        listPresenter.getEvents(offset)
         //Assert
         verify(mockViewState).showProgressBar()
         verify(mockViewState).displayError()
@@ -82,7 +82,7 @@ class MainPresenterTest {
         //Arrange
         val mockSharedPreferences = mock(SharedPreferences::class.java)
         //Act
-        mainPresenter.initSharedPreferences(mockSharedPreferences)
+        listPresenter.initSharedPreferences(mockSharedPreferences)
         //Assert
         verify(mockEventsRepo).setSharedPreferences(mockSharedPreferences)
     }
@@ -92,7 +92,7 @@ class MainPresenterTest {
         //Arrange
         val expectedNumber = 4
         //Act
-        mainPresenter.setSharedPrefs(expectedNumber)
+        listPresenter.setSharedPrefs(expectedNumber)
         //Assert
         verify(mockEventsRepo).setCurrentPagination(expectedNumber)
     }
@@ -102,7 +102,7 @@ class MainPresenterTest {
         //Arrange
         val expectedPosition = 2
         //Act
-        mainPresenter.eventClick(expectedPosition)
+        listPresenter.eventClick(expectedPosition)
         //Assert
         verify(mockViewState).navigateToMain(expectedPosition)
     }

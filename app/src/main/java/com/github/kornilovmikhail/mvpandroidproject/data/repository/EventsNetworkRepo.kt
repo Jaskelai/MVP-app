@@ -1,4 +1,4 @@
-package com.github.kornilovmikhail.mvpandroidproject.data.repo
+package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXAPI

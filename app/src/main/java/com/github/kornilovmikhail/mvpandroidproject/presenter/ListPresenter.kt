@@ -3,12 +3,12 @@ package com.github.kornilovmikhail.mvpandroidproject.presenter
 import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListView
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class MainPresenter(private val eventsRepo: EventsRepo) :
+class ListPresenter(private val eventsRepo: EventsRepo) :
     MvpPresenter<ListView>() {
 
     companion object {

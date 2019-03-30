@@ -1,9 +1,12 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.links
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.App
@@ -13,16 +16,15 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEve
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsActivity
-import kotlinx.android.synthetic.main.activity_links.*
+import kotlinx.android.synthetic.main.fragment_links.*
 import javax.inject.Inject
 
-class LinksActivity : MvpAppCompatActivity(), LinksView {
+class LinksFragment : MvpAppCompatFragment(), LinksView {
+    private var position: Int = 0
+
     @Inject
     @InjectPresenter
     lateinit var linksPresenter: LinksPresenter
-
-    private var position = 0
 
     @ProvidePresenter
     fun getPresenter(): LinksPresenter = linksPresenter
@@ -35,10 +37,15 @@ class LinksActivity : MvpAppCompatActivity(), LinksView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_links)
-        position = intent.getIntExtra(DetailsActivity.EXTRA_POSITION, 0)
+        setHasOptionsMenu(true)
+        position = arguments?.getInt("position") as Int
         linksPresenter.getLinks(position)
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.fragment_links, container, false)
 
     override fun displayEvent(event: Event) {
         tv_link_article.text = event.links.linkArticle ?: getString(R.string.none)
@@ -47,7 +54,7 @@ class LinksActivity : MvpAppCompatActivity(), LinksView {
     }
 
     override fun displayError() {
-        Toast.makeText(this, getString(R.string.server_events_error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, getString(R.string.server_events_error), Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgressBar() {

@@ -6,6 +6,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.app.component.DaggerAppCo
 import com.github.kornilovmikhail.mvpandroidproject.di.app.module.ContextModule
 import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataDBModule
 import com.github.kornilovmikhail.mvpandroidproject.di.app.module.DataNetModule
+import com.github.kornilovmikhail.mvpandroidproject.di.app.module.SharedPreferencesModule
 
 class App : Application() {
 
@@ -15,6 +16,7 @@ class App : Application() {
             .contextModule(ContextModule(this))
             .dataDBModule(DataDBModule())
             .dataNetModule(DataNetModule())
+            .sharedPreferencesModule(SharedPreferencesModule())
             .build()
     }
 

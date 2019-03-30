@@ -1,11 +1,11 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.event.module
 
-import com.github.kornilovmikhail.mvpandroidproject.data.PaginationPreferences
-import com.github.kornilovmikhail.mvpandroidproject.data.db.dao.EventDao
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.PaginationPreferencesRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.EventDao
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXAPI
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsDBRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsNetworkRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repo.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsDBRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsNetworkRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.EventScope
 import dagger.Module
 import dagger.Provides
@@ -21,7 +21,8 @@ class EventModule {
 
     @Provides
     @EventScope
-    fun providePagination(): PaginationPreferences = PaginationPreferences()
+    fun providePagination(): PaginationPreferencesRepo =
+        PaginationPreferencesRepo()
 
     @Provides
     @EventScope
