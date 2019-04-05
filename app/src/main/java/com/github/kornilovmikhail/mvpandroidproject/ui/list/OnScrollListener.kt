@@ -1,12 +1,12 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class OnScrollListener(
-    private val layoutManager: LinearLayoutManager,
+    private val layoutManager: androidx.recyclerview.widget.LinearLayoutManager,
     private val eventLambda: (Int) -> Unit
-) : RecyclerView.OnScrollListener() {
+) : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
 
     companion object {
         private var previousTotal = 0
@@ -17,7 +17,7 @@ class OnScrollListener(
         private var totalItemCount = 0
     }
 
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
         visibleItemCount = recyclerView.childCount

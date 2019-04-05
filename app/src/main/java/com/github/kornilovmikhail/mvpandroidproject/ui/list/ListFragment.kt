@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -52,9 +52,9 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     }
 
     private fun setupViews() {
-        rv_events.layoutManager = LinearLayoutManager(context)
+        rv_events.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         rv_events.addOnScrollListener(OnScrollListener(
-            rv_events.layoutManager as LinearLayoutManager
+            rv_events.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
         ) {
             listPresenter.getEvents(it)
         })

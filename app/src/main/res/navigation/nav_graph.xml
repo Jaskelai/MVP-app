@@ -45,7 +45,4 @@
               android:label="ThirdFragment">
         <action android:id="@+id/action_thirdFragment_to_fifthFragment" app:destination="@id/fifthFragment"/>
     </fragment>
-    <activity android:id="@+id/secondActivity"
-              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.SecondActivity"
-              android:label="SecondActivity"/>
 </navigation>

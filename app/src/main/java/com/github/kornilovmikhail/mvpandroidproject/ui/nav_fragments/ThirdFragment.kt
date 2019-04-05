@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.github.kornilovmikhail.mvpandroidproject.R
+import kotlinx.android.synthetic.main.fragment_third.*
 
 class ThirdFragment : MvpAppCompatFragment() {
 
