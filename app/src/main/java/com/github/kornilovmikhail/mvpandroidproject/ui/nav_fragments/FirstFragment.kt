@@ -13,5 +13,4 @@ class FirstFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_first, container, false)
-
 }

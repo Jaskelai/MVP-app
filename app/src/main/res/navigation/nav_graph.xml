@@ -36,7 +36,9 @@
     <fragment android:id="@+id/sixthFragment"
               tools:layuout="@layout/fragment_sixth"
               android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.SixthFragment"
-              android:label="SixthFragment"/>
+              android:label="SixthFragment">
+        <action android:id="@+id/action_sixthFragment_to_firstFragment" app:destination="@id/firstFragment"/>
+    </fragment>
     <fragment android:id="@+id/navigation_home"
               tools:layuout="@layout/fragment_seventh"
               android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.ThirdFragment"

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.kornilovmikhail.mvpandroidproject.R
 import kotlinx.android.synthetic.main.activity_second.*
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.toolbar.*
 
 class SecondActivity : AppCompatActivity() {
@@ -18,6 +17,7 @@ class SecondActivity : AppCompatActivity() {
         navigation.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+
             toolbar.setTitle(
                 when (destination.id) {
                     R.id.navigation_home -> R.string.title_home
