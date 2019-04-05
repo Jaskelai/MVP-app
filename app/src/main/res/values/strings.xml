@@ -18,4 +18,5 @@
     <string name="title_profile">Profile</string>
     <string name="app_name">MVPProject</string>
     <string name="btn">Next</string>
+    <string name="btn_main">back to main</string>
 </resources>
