@@ -14,13 +14,10 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEve
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.links.LinksFragment
 import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject
 
 class DetailsFragment : MvpAppCompatFragment(), DetailView {
-    private var position: Int = 0
-
     @Inject
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
@@ -28,6 +25,17 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
     @ProvidePresenter
     fun getPresenter(): DetailPresenter = detailPresenter
 
+    companion object {
+        private var position: Int = 0
+
+        fun getInstance(position: Int): DetailsFragment {
+            val detailsFragment = DetailsFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            detailsFragment.arguments = args
+            return detailsFragment
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
@@ -38,7 +46,6 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
             .inject(this)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        position = arguments?.getInt("position") as Int
         detailPresenter.getEvent(position)
     }
 
@@ -53,20 +60,9 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_open_links -> navigateToLinks(position)
+            R.id.action_open_links -> detailPresenter.onIconClicked(position)
         }
         return true
-    }
-
-    private fun navigateToLinks(position: Int) {
-        val args = Bundle()
-        args.putInt("position", position)
-        val linksFragment = LinksFragment()
-        linksFragment.arguments = args
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.main_container, linksFragment)
-            ?.addToBackStack(null)
-            ?.commit()
     }
 
     override fun displayEvent(event: Event) {

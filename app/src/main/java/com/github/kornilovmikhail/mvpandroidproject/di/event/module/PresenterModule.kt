@@ -7,13 +7,14 @@ import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
 import dagger.Module
 import dagger.Provides
+import ru.terrakok.cicerone.Router
 
 @Module
 class PresenterModule {
     @Provides
     @EventScope
-    fun provideDetailPresenter(eventsRepo: EventsRepo): DetailPresenter =
-        DetailPresenter(eventsRepo)
+    fun provideDetailPresenter(eventsRepo: EventsRepo, router: Router): DetailPresenter =
+        DetailPresenter(eventsRepo, router)
 
     @Provides
     @EventScope
@@ -22,6 +23,6 @@ class PresenterModule {
 
     @Provides
     @EventScope
-    fun provideMainPresenter(eventsRepo: EventsRepo): ListPresenter =
-        ListPresenter(eventsRepo)
+    fun provideMainPresenter(eventsRepo: EventsRepo, router: Router): ListPresenter =
+        ListPresenter(eventsRepo, router)
 }

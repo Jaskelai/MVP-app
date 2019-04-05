@@ -5,8 +5,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                 android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
 
         <TextView
                 android:id="@+id/tv_title_details_activity"
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_details_details_activity"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
             android:id="@+id/details_progressBar"

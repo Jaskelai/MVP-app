@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class OnScrollListener(
     private val layoutManager: LinearLayoutManager,

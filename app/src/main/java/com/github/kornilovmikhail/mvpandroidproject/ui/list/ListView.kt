@@ -12,6 +12,5 @@ interface ListView : MvpView {
     fun displayError()
     fun showProgressBar()
     fun hideProgressBar()
-    fun navigateToMain(position: Int)
     fun detachOnScrollListeners()
 }

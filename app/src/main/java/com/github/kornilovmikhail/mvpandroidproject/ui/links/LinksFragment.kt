@@ -29,6 +29,18 @@ class LinksFragment : MvpAppCompatFragment(), LinksView {
     @ProvidePresenter
     fun getPresenter(): LinksPresenter = linksPresenter
 
+    companion object {
+        private var position: Int = 0
+
+        fun getInstance(position: Int): LinksFragment {
+            val linksFragment = LinksFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            linksFragment.arguments = args
+            return linksFragment
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
             .appComponent(App.getAppComponents())
@@ -38,7 +50,6 @@ class LinksFragment : MvpAppCompatFragment(), LinksView {
             .inject(this)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        position = arguments?.getInt("position") as Int
         linksPresenter.getLinks(position)
     }
 

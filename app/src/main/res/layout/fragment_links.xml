@@ -4,8 +4,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                 android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
 
         <ImageView
                 android:id="@+id/iv_reddit"
@@ -94,7 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_links_links_activity"
                 app:layout_constraintStart_toEndOf="@+id/iv_wiki"
                 android:layout_marginStart="28dp"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
             android:id="@+id/links_progressBar"

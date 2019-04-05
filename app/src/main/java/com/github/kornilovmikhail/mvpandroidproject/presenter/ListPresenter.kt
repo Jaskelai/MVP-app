@@ -4,11 +4,13 @@ import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
+import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListView
 import io.reactivex.rxkotlin.subscribeBy
+import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class ListPresenter(private val eventsRepo: EventsRepo) :
+class ListPresenter(private val eventsRepo: EventsRepo, private val router: Router) :
     MvpPresenter<ListView>() {
 
     companion object {
@@ -45,5 +47,5 @@ class ListPresenter(private val eventsRepo: EventsRepo) :
 
     fun setSharedPrefs(value: Int) = eventsRepo.setCurrentPagination(value)
 
-    fun eventClick(position: Int) = viewState.navigateToMain(position)
+    fun eventClick(position: Int) = router.navigateTo(Screens.DetailScreen(position))
 }

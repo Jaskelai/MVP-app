@@ -1,6 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.app.module
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.github.kornilovmikhail.mvpandroidproject.data.local.EventDatabase
 import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.EventDao

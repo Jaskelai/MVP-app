@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -16,7 +16,6 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
-import com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -28,6 +27,10 @@ class ListFragment : MvpAppCompatFragment(), ListView {
 
     @ProvidePresenter
     fun getPresenter(): ListPresenter = listPresenter
+
+    companion object {
+        fun getInstance(): ListFragment = ListFragment()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
@@ -86,17 +89,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     }
 
     override fun detachOnScrollListeners() = rv_events.clearOnScrollListeners()
-
-    override fun navigateToMain(position: Int) {
-        val args = Bundle()
-        args.putInt("position", position)
-        val detailsFragment = DetailsFragment()
-        detailsFragment.arguments = args
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.main_container, detailsFragment)
-            ?.addToBackStack(null)
-            ?.commit()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_toolbar_main, menu)
