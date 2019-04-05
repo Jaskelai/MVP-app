@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MVPAndroidProject</string>
     <string name="server_events_error">Can\'t load events</string>
     <string name="server_events_success">Events loaded</string>
     <string name="paginationPreferences">Pagination</string>
@@ -10,4 +9,12 @@
     <string name="links">Links</string>
     <string name="none">none</string>
     <string name="img_error">image</string>
+    <string name="menu_search">search</string>
+    <string name="menu_settings">settings</string>
+    <string name="menu_navigation">navigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_feed">Feed</string>
+    <string name="title_profile">Profile</string>
+    <string name="app_name">MVPProject</string>
 </resources>

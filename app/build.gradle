@@ -15,7 +15,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -44,33 +44,34 @@ detekt {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    def support_version = "28.0.0"
+    def support_version = '1.0.0-beta01'
     def retrofit2_version = "2.5.0"
-    def room_version = "1.1.1"
+    def room_version = '2.0.0-beta01'
     def moxy_version = "1.5.5"
     def mockito_version = "2.25.0"
     def dagger_version = "2.21"
+    def nav_version = "1.0.0-alpha08"
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //support libraries
-    implementation "com.android.support:appcompat-v7:${support_version}"
-    implementation "com.android.support:recyclerview-v7:${support_version}"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "androidx.appcompat:appcompat:${support_version}"
+    implementation "androidx.recyclerview:recyclerview:${support_version}"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     //tests
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-core:${mockito_version}"
     testImplementation "org.mockito:mockito-inline:${mockito_version}"
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit2_version}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit2_version}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
     //room
-    implementation "android.arch.persistence.room:runtime:${room_version}"
-    kapt "android.arch.persistence.room:compiler:${room_version}"
-    implementation "android.arch.persistence.room:rxjava2:${room_version}"
+    implementation "androidx.room:room-runtime:${room_version}"
+    kapt "androidx.room:room-compiler:${room_version}"
+    implementation "androidx.room:room-rxjava2:${room_version}"
     //rx
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
@@ -84,4 +85,9 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${dagger_version}"
     kapt "com.google.dagger:dagger-android-processor:${dagger_version}"
     kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    //navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    //design
+    implementation 'com.google.android.material:material:1.0.0-beta01'
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/firstFragment">
+
+    <fragment android:id="@+id/fifthFragment"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FifthFragment"
+              tools:layuout="@layout/fragment_first"
+              android:label="FifthFragment"/>
+    <fragment android:id="@+id/firstFragment"
+              tools:layuout="@layout/fragment_second"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FirstFragment"
+              android:label="FirstFragment">
+        <action android:id="@+id/action_firstFragment_to_thirdFragment" app:destination="@id/navigation_home"/>
+        <action android:id="@+id/action_firstFragment_to_fourthFragment" app:destination="@id/navigation_feed"/>
+        <action android:id="@+id/action_firstFragment_to_secondFragment" app:destination="@id/navigation_search"/>
+    </fragment>
+    <fragment android:id="@+id/navigation_feed"
+              tools:layuout="@layout/fragment_third"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FourthFragment"
+              android:label="FourthFragment">
+        <action android:id="@+id/action_fourthFragment_to_seventhFragment" app:destination="@id/seventhFragment"/>
+    </fragment>
+    <fragment android:id="@+id/navigation_search"
+              tools:layuout="@layout/fragment_fourth"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.SecondFragment"
+              android:label="SecondFragment">
+        <action android:id="@+id/action_secondFragment_to_sixthFragment" app:destination="@id/sixthFragment"/>
+    </fragment>
+    <fragment android:id="@+id/seventhFragment"
+              tools:layuout="@layout/fragment_fifth"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.SeventhFragment"
+              android:label="SeventhFragment"/>
+    <fragment android:id="@+id/sixthFragment"
+              tools:layuout="@layout/fragment_sixth"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.SixthFragment"
+              android:label="SixthFragment"/>
+    <fragment android:id="@+id/navigation_home"
+              tools:layuout="@layout/fragment_seventh"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.ThirdFragment"
+              android:label="ThirdFragment">
+        <action android:id="@+id/action_thirdFragment_to_fifthFragment" app:destination="@id/fifthFragment"/>
+    </fragment>
+    <activity android:id="@+id/secondActivity"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.SecondActivity"
+              android:label="SecondActivity"/>
+</navigation>
