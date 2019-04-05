@@ -27,7 +27,7 @@ class ListPresenterTest {
     lateinit var mockEventsRepo: EventsRepo
 
     @Mock
-    lateinit var mockRouter: Router
+    lateinit var router: Router
 
     @InjectMocks
     @Spy
@@ -108,7 +108,6 @@ class ListPresenterTest {
         val expectedPosition = 2
         val mockScreenProxy = mock(ProxyDetailScreen::class.java)
         val mockScreen = mock(Screens.DetailScreen::class.java)
-        `when`(mockScreenProxy.getDetailScreen(expectedPosition)).thenReturn(mockScreen)
         //Act
         listPresenter.eventClick(expectedPosition)
         //Assert
