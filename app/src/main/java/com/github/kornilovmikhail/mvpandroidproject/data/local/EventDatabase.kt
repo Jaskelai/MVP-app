@@ -1,7 +1,7 @@
 package com.github.kornilovmikhail.mvpandroidproject.data.local
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.EventDao
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Links
