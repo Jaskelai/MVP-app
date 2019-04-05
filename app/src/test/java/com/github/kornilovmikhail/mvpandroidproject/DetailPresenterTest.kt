@@ -15,6 +15,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnitRunner
+import ru.terrakok.cicerone.Router
 
 @RunWith(MockitoJUnitRunner::class)
 class DetailPresenterTest {
@@ -24,6 +25,9 @@ class DetailPresenterTest {
 
     @Mock
     lateinit var mockEventsRepo: EventsRepo
+
+    @Mock
+    lateinit var router: Router
 
     @InjectMocks
     @Spy

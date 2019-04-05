@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.fragment_links.*
 import javax.inject.Inject
 
 class LinksFragment : MvpAppCompatFragment(), LinksView {
-    private var position: Int = 0
-
     @Inject
     @InjectPresenter
     lateinit var linksPresenter: LinksPresenter
@@ -33,6 +31,7 @@ class LinksFragment : MvpAppCompatFragment(), LinksView {
         private var position: Int = 0
 
         fun getInstance(position: Int): LinksFragment {
+            this.position = position
             val linksFragment = LinksFragment()
             val args = Bundle()
             args.putInt("position", position)

@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Event
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.`ListView$$State`
 import io.reactivex.Single
 import org.junit.Before
@@ -13,6 +14,7 @@ import org.mockito.*
 import org.mockito.Mockito.*
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import ru.terrakok.cicerone.Router
 
 
 @RunWith(MockitoJUnitRunner::class)
@@ -23,6 +25,9 @@ class ListPresenterTest {
 
     @Mock
     lateinit var mockEventsRepo: EventsRepo
+
+    @Mock
+    lateinit var mockRouter: Router
 
     @InjectMocks
     @Spy
@@ -101,9 +106,15 @@ class ListPresenterTest {
     fun testEventClick() {
         //Arrange
         val expectedPosition = 2
+        val mockScreenProxy = mock(ProxyDetailScreen::class.java)
+        val mockScreen = mock(Screens.DetailScreen::class.java)
+        `when`(mockScreenProxy.getDetailScreen(expectedPosition)).thenReturn(mockScreen)
         //Act
         listPresenter.eventClick(expectedPosition)
         //Assert
-        verify(mockViewState).navigateToMain(expectedPosition)
+    }
+
+    class ProxyDetailScreen {
+        fun getDetailScreen(position: Int) = Screens.DetailScreen(position)
     }
 }

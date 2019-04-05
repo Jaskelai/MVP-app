@@ -15,7 +15,6 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEve
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
-import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject

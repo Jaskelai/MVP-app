@@ -29,6 +29,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         private var position: Int = 0
 
         fun getInstance(position: Int): DetailsFragment {
+            this.position = position
             val detailsFragment = DetailsFragment()
             val args = Bundle()
             args.putInt("position", position)
