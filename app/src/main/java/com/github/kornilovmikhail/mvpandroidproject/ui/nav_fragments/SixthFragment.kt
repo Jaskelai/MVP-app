@@ -16,9 +16,8 @@ class SixthFragment : MvpAppCompatFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_sixth, container, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         button_sixth.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.firstFragment, null))
     }
 }
