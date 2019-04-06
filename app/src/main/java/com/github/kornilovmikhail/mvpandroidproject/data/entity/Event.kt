@@ -1,6 +1,5 @@
 package com.github.kornilovmikhail.mvpandroidproject.data.entity
 
-
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity

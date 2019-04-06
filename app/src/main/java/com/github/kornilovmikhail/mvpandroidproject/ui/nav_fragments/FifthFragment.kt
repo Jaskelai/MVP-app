@@ -13,5 +13,4 @@ class FifthFragment : MvpAppCompatFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_fifth, container, false)
-
 }

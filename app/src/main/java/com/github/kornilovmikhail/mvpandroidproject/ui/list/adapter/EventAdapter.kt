@@ -41,7 +41,8 @@ class EventAdapter(
 
     }
 
-    class EventHolder(override val containerView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView),
+    class EventHolder(override val containerView: View) :
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(containerView),
         LayoutContainer {
 
         fun bind(eventName: String) {

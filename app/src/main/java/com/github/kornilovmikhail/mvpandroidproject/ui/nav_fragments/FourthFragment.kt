@@ -19,6 +19,5 @@ class FourthFragment : MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_fourth.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.seventhFragment, null))
-
     }
 }

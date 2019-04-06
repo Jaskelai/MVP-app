@@ -1,8 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -20,7 +18,6 @@ import com.github.kornilovmikhail.mvpandroidproject.ui.SecondActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
-import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FirstFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 

@@ -5,14 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import com.github.kornilovmikhail.mvpandroidproject.R
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FirstFragment
-import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FourthFragment
-import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.SecondFragment
-import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.ThirdFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_second.*
 
