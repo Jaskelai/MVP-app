@@ -22,21 +22,10 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
 
+    private var position = 0
+
     @ProvidePresenter
     fun getPresenter(): DetailPresenter = detailPresenter
-
-    companion object {
-        private var position: Int = 0
-
-        fun getInstance(position: Int): DetailsFragment {
-            this.position = position
-            val detailsFragment = DetailsFragment()
-            val args = Bundle()
-            args.putInt("position", position)
-            detailsFragment.arguments = args
-            return detailsFragment
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
@@ -46,6 +35,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
+        position = arguments?.getInt(EXTRA_POSITION) as Int
         setHasOptionsMenu(true)
         detailPresenter.getEvent(position)
     }
@@ -82,5 +72,17 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
 
     override fun hideProgressBar() {
         details_progressBar.visibility = ProgressBar.INVISIBLE
+    }
+
+    companion object {
+        private const val EXTRA_POSITION = "POSITION"
+
+        fun getInstance(position: Int): DetailsFragment {
+            val detailsFragment = DetailsFragment()
+            val args = Bundle()
+            args.putInt(EXTRA_POSITION, position)
+            detailsFragment.arguments = args
+            return detailsFragment
+        }
     }
 }

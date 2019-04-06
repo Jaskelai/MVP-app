@@ -27,10 +27,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     @ProvidePresenter
     fun getPresenter(): ListPresenter = listPresenter
 
-    companion object {
-        fun getInstance(): ListFragment = ListFragment()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerEventComponent.builder()
             .appComponent(App.getAppComponents())
@@ -103,5 +99,9 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     private fun createDialog() {
         val dialog = PaginationDialog()
         dialog.show(activity?.supportFragmentManager, "custom")
+    }
+
+    companion object {
+        fun getInstance(): ListFragment = ListFragment()
     }
 }
