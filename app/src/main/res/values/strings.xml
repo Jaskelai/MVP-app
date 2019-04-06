@@ -19,4 +19,12 @@
     <string name="app_name">MVPProject</string>
     <string name="btn">Next</string>
     <string name="btn_main">back to main</string>
+    <string name="title_fragments">Destin</string>
+    <string name="first_fr">First</string>
+    <string name="second_fr">Second</string>
+    <string name="third_fr">Third</string>
+    <string name="fourth_fr">Fourth</string>
+    <string name="fifth_fr">Fifth</string>
+    <string name="sixth_fr">Sixth</string>
+    <string name="seventh_fr">Seventh</string>
 </resources>

@@ -14,10 +14,10 @@
               android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FirstFragment"
               android:label="FirstFragment">
         <action android:id="@+id/action_firstFragment_to_thirdFragment" app:destination="@id/navigation_home"/>
-        <action android:id="@+id/action_firstFragment_to_fourthFragment" app:destination="@id/navigation_feed"/>
+        <action android:id="@+id/action_firstFragment_to_fourthFragment" app:destination="@id/navigation_profile"/>
         <action android:id="@+id/action_firstFragment_to_secondFragment" app:destination="@id/navigation_search"/>
     </fragment>
-    <fragment android:id="@+id/navigation_feed"
+    <fragment android:id="@+id/navigation_profile"
               tools:layuout="@layout/fragment_third"
               android:name="com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FourthFragment"
               android:label="FourthFragment">
@@ -45,4 +45,7 @@
               android:label="ThirdFragment">
         <action android:id="@+id/action_thirdFragment_to_fifthFragment" app:destination="@id/fifthFragment"/>
     </fragment>
+    <activity android:id="@+id/secondActivity"
+              android:name="com.github.kornilovmikhail.mvpandroidproject.ui.SecondActivity"
+              android:label="SecondActivity"/>
 </navigation>

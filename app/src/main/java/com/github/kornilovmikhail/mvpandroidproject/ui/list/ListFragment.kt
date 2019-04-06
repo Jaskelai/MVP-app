@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.ui.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
@@ -15,9 +16,11 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerEve
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.EventModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.SecondActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.adapter.EventAdapter
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.dialog.PaginationDialog
+import com.github.kornilovmikhail.mvpandroidproject.ui.nav_fragments.FirstFragment
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
@@ -103,8 +106,10 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = context?.let { SecondActivity.newIntent(it) }
         when (item.itemId) {
             R.id.action_pagination -> createDialog()
+            R.id.action_open_fragments -> startActivity(intent)
         }
         return true
     }

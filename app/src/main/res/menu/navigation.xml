@@ -11,11 +11,10 @@
             android:icon="@drawable/wiki"
             android:title="@string/title_home" />
 
-    <item
-            android:id="@+id/navigation_feed"
-            android:icon="@drawable/reddit"
-            android:title="@string/title_feed" />
-
+    <!--<item-->
+            <!--android:id="@+id/navigation_profile"-->
+            <!--android:icon="@drawable/reddit"-->
+            <!--android:title="@string/title_feed" />-->
     <item
             android:id="@+id/navigation_profile"
             android:icon="@drawable/link_icon_white"

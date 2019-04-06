@@ -5,4 +5,9 @@
           android:title="@string/paginationPreferences"
           android:icon="@drawable/ic_settings_white_24dp"
           app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_open_fragments"
+          android:orderInCategory="300"
+          android:title="@string/title_fragments"
+          android:icon="@drawable/double_arrow"
+          app:showAsAction="always"/>
 </menu>
