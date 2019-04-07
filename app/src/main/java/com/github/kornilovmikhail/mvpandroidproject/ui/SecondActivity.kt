@@ -13,20 +13,20 @@ import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
 
-    companion object {
-
-        fun newIntent(context: Context): Intent = Intent(context, SecondActivity::class.java)
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-        setSupportActionBar(main_toolbar as Toolbar?)
+        setSupportActionBar(main_toolbar as Toolbar)
 
         val navController = findNavController(R.id.fragment_host)
         navigation.setupWithNavController(navController)
     }
 
-        override fun onSupportNavigateUp() = findNavController(R.id.fragment_host).navigateUp()
+    override fun onSupportNavigateUp() = findNavController(R.id.fragment_host).navigateUp()
+
+    companion object {
+
+        fun newIntent(context: Context): Intent = Intent(context, SecondActivity::class.java)
+
+    }
 }
