@@ -35,7 +35,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        position = arguments?.getInt(EXTRA_POSITION) as Int
+        position = arguments?.getInt(EXTRA_POSITION) ?: DEFAULT_POSITION
         setHasOptionsMenu(true)
         detailPresenter.getEvent(position)
     }
@@ -75,6 +75,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
     }
 
     companion object {
+        private const val DEFAULT_POSITION = 0
         private const val EXTRA_POSITION = "POSITION"
 
         fun getInstance(position: Int): DetailsFragment {
