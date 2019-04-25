@@ -1,8 +1,10 @@
 package com.github.kornilovmikhail.mvpandroidproject
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -24,6 +26,9 @@ class DetailsUITest {
     @Before
     fun initLoad() {
         Thread.sleep(2000)
+        onView(withId(R.id.rv_events))
+            .perform(RecyclerViewActions
+                .actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
     }
 
     @Test
