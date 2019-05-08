@@ -5,31 +5,42 @@ import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailView
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.*
 import ru.terrakok.cicerone.Router
+import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
 class DetailPresenter(private val eventsRepo: EventsRepo, private val router: Router) : MvpPresenter<DetailView>() {
+    private val job = SupervisorJob()
+    private val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     fun getEvent(position: Int) {
-        eventsRepo.getEvents(0)
-            .doOnSubscribe {
-                viewState.showProgressBar()
+        val handler = CoroutineExceptionHandler { _, _ ->
+            viewState.displayError()
+        }
+        viewState.showProgressBar()
+        CoroutineScope(Dispatchers.IO).launch(handler) {
+            val events = withContext(Dispatchers.IO) {
+                eventsRepo.getEvents(0)
             }
-            .doAfterTerminate {
-                viewState.hideProgressBar()
-            }
-            .subscribeBy(
-                onSuccess = {
-                    viewState.displayEvent(it[position])
-                },
-                onError =
-                {
+            withContext(Dispatchers.Main) {
+                try {
+                    viewState.displayEvent(events[position])
+                } catch (e: Throwable) {
                     viewState.displayError()
                 }
-            )
+            }
+        }.invokeOnCompletion {
+            viewState.hideProgressBar()
+        }
     }
 
     fun onIconClicked(position: Int) {
         router.navigateTo(Screens.LinksScreen(position))
+    }
+
+    fun onCleared() {
+        coroutineContext.cancelChildren()
     }
 }

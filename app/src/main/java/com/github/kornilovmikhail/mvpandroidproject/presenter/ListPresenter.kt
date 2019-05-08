@@ -6,41 +6,42 @@ import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.EventsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListView
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.*
 import ru.terrakok.cicerone.Router
+import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
 class ListPresenter(private val eventsRepo: EventsRepo, private val router: Router) :
     MvpPresenter<ListView>() {
 
-    companion object {
-        private const val offsetDefault = 0
-    }
+    private val job = SupervisorJob()
+    private val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     fun getEvents(offset: Int) {
-        eventsRepo.getEvents(offset)
-            .doOnSubscribe {
-                viewState.showProgressBar()
+        val handler = CoroutineExceptionHandler { _, _ ->
+            viewState.displayError()
+        }
+        viewState.showProgressBar()
+        CoroutineScope(coroutineContext).launch(handler) {
+            val events = withContext(Dispatchers.IO) {
+                val eventsLocal = eventsRepo.getEvents(offset)
+                eventsRepo.cacheEvents(eventsLocal)
+                eventsLocal
             }
-            .doAfterTerminate {
-                viewState.hideProgressBar()
-            }
-            .subscribeBy(
-                onSuccess = {
-                    if (it.isEmpty()) {
-                        if (offset != offsetDefault) {
-                            viewState.detachOnScrollListeners()
-                        }
-                    } else {
-                        eventsRepo.cacheEvents(it)
-                        viewState.displayEvents(it)
-                        viewState.displaySuccess()
+            withContext(Dispatchers.Main) {
+                if (events.isEmpty()) {
+                    if (offset != offsetDefault) {
+                        viewState.detachOnScrollListeners()
                     }
-                },
-                onError = {
-                    viewState.displayError()
+                } else {
+                    viewState.displayEvents(events)
+                    viewState.displaySuccess()
                 }
-            )
+            }
+        }.invokeOnCompletion {
+            viewState.hideProgressBar()
+        }
     }
 
     fun initSharedPreferences(sharedPreferences: SharedPreferences) = eventsRepo.setSharedPreferences(sharedPreferences)
@@ -48,4 +49,12 @@ class ListPresenter(private val eventsRepo: EventsRepo, private val router: Rout
     fun setSharedPrefs(value: Int) = eventsRepo.setCurrentPagination(value)
 
     fun eventClick(position: Int) = router.navigateTo(Screens.DetailScreen(position))
+
+    fun onCleared() {
+        coroutineContext.cancelChildren()
+    }
+
+    companion object {
+        private const val offsetDefault = 0
+    }
 }

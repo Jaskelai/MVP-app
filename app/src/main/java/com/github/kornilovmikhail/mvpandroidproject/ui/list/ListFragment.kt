@@ -49,6 +49,11 @@ class ListFragment : MvpAppCompatFragment(), ListView {
         listPresenter.getEvents(0)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        listPresenter.onCleared()
+    }
+
     private fun setupViews() {
         rv_events.layoutManager = LinearLayoutManager(context)
         rv_events.addOnScrollListener(OnScrollListener(

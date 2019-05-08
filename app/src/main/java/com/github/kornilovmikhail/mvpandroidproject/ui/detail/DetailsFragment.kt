@@ -49,6 +49,11 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         menuInflater.inflate(R.menu.menu_toolbar_details, menu)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        detailPresenter.onCleared()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_open_links -> detailPresenter.onIconClicked(position)

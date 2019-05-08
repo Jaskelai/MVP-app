@@ -2,10 +2,10 @@ package com.github.kornilovmikhail.mvpandroidproject.di.app.module
 
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SpaceXAPI
 import com.github.kornilovmikhail.mvpandroidproject.di.app.scope.ApplicationScope
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
@@ -18,11 +18,11 @@ class DataNetModule {
     @ApplicationScope
     fun provideRetrofit(
         gsonConverterFactory: GsonConverterFactory,
-        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
+        coroutineCallAdapterFactory: CoroutineCallAdapterFactory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(gsonConverterFactory)
-        .addCallAdapterFactory(rxJava2CallAdapterFactory)
+        .addCallAdapterFactory(coroutineCallAdapterFactory)
         .build()
 
     @Provides
@@ -35,5 +35,5 @@ class DataNetModule {
 
     @Provides
     @ApplicationScope
-    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
+    fun provideRxJava2CallAdapterFactory(): CoroutineCallAdapterFactory = CoroutineCallAdapterFactory()
 }

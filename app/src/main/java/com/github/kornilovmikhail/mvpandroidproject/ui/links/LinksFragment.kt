@@ -47,6 +47,11 @@ class LinksFragment : MvpAppCompatFragment(), LinksView {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_links, container, false)
 
+    override fun onDestroy() {
+        super.onDestroy()
+        linksPresenter.onCleared()
+    }
+
     override fun displayEvent(event: Event) {
         tv_link_article.text = event.links.linkArticle ?: getString(R.string.none)
         tv_link_reddit.text = event.links.linkReddit ?: getString(R.string.none)
