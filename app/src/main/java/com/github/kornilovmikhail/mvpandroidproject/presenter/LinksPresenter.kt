@@ -24,11 +24,7 @@ class LinksPresenter(private val eventsRepo: EventsRepo) : MvpPresenter<LinksVie
                 eventsRepo.getEvents(0)
             }
             withContext(Dispatchers.Main) {
-                try {
-                    viewState.displayEvent(events[position])
-                } catch (e: Throwable) {
-                    viewState.displayError()
-                }
+                viewState.displayEvent(events[position])
             }
         }.invokeOnCompletion {
             viewState.hideProgressBar()

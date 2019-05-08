@@ -25,11 +25,7 @@ class DetailPresenter(private val eventsRepo: EventsRepo, private val router: Ro
                 eventsRepo.getEvents(0)
             }
             withContext(Dispatchers.Main) {
-                try {
-                    viewState.displayEvent(events[position])
-                } catch (e: Throwable) {
-                    viewState.displayError()
-                }
+                viewState.displayEvent(events[position])
             }
         }.invokeOnCompletion {
             viewState.hideProgressBar()
